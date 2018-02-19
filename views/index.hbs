@@ -1,0 +1,139 @@
+
+{{!-- https://www.youtube.com/watch?v=4gHsS489nHw --}}
+<div class="view hm-white-light jarallax" data-jarallax='{"speed": 0.2}' data-jarallax-video="#">
+    <div class="full-bg-img">
+        <div class="container flex-center">
+            <div class="row">
+                <div class="col-md-12 wow fadeIn">
+                    <div class="text-center text-danger">
+
+                        <h5 class="font-up mb-3 mt-1 font-bold wow fadeInDown" style="font-weight:bold; text-shadow: 0 0 8px #FFF, 0 -2px 12px #222, 0 -5px 15px #666;" data-wow-delay="0.4s"> <a href=""> Designed && Development By Obaida Alhassan </a></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="py-2"></div>
+<div class="container-fluid">
+<div class="row">
+<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+    <div class="jumbotron jumbback">
+        <h2 class="display-3 tlt"> <strong >Find a Doctor</strong>   <small>it's always easy </small> </h2>
+        <p class="lead"> just select your district and see the doctors are  avilable there
+        <i style="font-size:33px;" class="fa fa-heartbeat fa=fw fa=lg animated infinite  pulse" aria-hidden="true"></i>    
+            </p>
+        <hr class="my-4">
+        <p>More info 
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore odit laboriosam aliquam sunt ex labore adipisci corporis blanditiis suscipit natus est dicta recusandae minima, quasi at enim commodi distinctio. Molestias.
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Obcaecati consectetur impedit ab aspernatur vero, magnam cumque consequuntur deserunt animi deleniti voluptatum voluptatem exercitationem, officia voluptate quasi inventore harum perferendis quaerat?
+        </p>
+
+    </div>
+</div>
+
+ <div class="container">
+    <hr class = "coloredHRR">
+     
+     <div class="row">
+ <div class="col-xs-12 col-md-12">
+    <div class="nicediv">
+        <form action="/doctors" method="post">
+        <div class="row">
+            <div class="col-xs-6 col-md-6">
+                <label class="tlt"> Your District </label>
+                <select required class="form-control" name="district" >
+                    <option value="">.......</option>
+                {{# each District }}
+                    <option style="text-transform:capitalize" value="{{this.name}}">{{this.name}}</option>
+                {{/ each}}
+                </select>
+            </div>
+            <div class="col-xs-6 col-md-6">
+                <label class="tlt"> Your Specialities </label>
+                
+                <select required class="form-control" name="category" >
+                <option value="">.......</option>
+                {{# each category }}
+                    <option style="text-transform:capitalize" value="{{this.name}}">{{this.name}}</option>
+                {{/ each}}
+            </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary ">Search <i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+    </div>
+       
+</div>
+     </div>
+ </div>
+
+
+</div>
+</div>
+
+
+<div class="container">
+<div class="row">
+	<div id="wrapper">
+		<div id="image">
+			<div class="image i1"><img src="https://cdn-images-1.medium.com/max/1024/1*gWyVOINR-UN2128q6N7GxQ.jpeg" class="img-responsive"></div>
+			<div class="image i2"><img src="http://www.essentialbaby.com.au/content/dam/images/2/5/e/b/a/image.related.articleLeadwide.620x349.25eas.png/1346828168743.jpg" class="img-responsive"></div>
+			<div class="image i3"><img src="https://www.rd.com/wp-content/uploads/2017/11/13_kids_things-your-child-s-pediatrician-wont-tell-you_269923820_goodluz-760x506.jpg" class="img-responsive"></div>
+			<div class="image i4"><img src="https://utahfamily.com/main/wp-content/uploads/2016/04/bigstock-doctor-examining-a-child-1024-1000x600.jpg" class="img-responsive"></div>
+			<div class="image i5"><img src="https://s-i.huffpost.com/gen/1259640/images/o-KIDS-AT-THE-DOCTOR-facebook.jpg" class="img-responsive"></div>
+			<div class="image i6"><img src="https://blogs.webmd.com/doctors/files/2017/12/ThinkstockPhotos-667895140.jpg" class="img-responsive"></div>
+			<div class="image i7"><img src="https://s3.amazonaws.com/lifesite/Doctor_questioning_child.jpg" class="img-responsive"></div>
+			<div class="image i8"><img src="https://i2-prod.mirror.co.uk/incoming/article10720512.ece/ALTERNATES/s615/PROD-Female-doctor-assisting-senior-woman-smiling.jpg" class="img-responsive"></div>
+		</div>
+	</div>
+
+
+
+
+</div>
+
+    <hr class = "coloredHR">
+    <div class="row widthImage">
+        <div class="col-xs-6 col-md-3">
+        <div class="container1 ">
+            <img src="https://thumbs.dreamstime.com/b/medical-professionals-icon-group-doctors-nurse-over-white-background-colorful-design-vector-illustration-85791519.jpg" class="img-fluid  rounded-top image" alt="Doctor image">
+        <div class="middle">
+        <div class="text"><i class="fa fa-heartbeat animated infinite pulse" aria-hidden="true"></i> we are here to help you  <i class="fa fa-heartbeat animated infinite pulse" aria-hidden="true"></i> <br> team </div>
+        </div> 
+        </div>
+        </div>
+        {{!--  --}}
+        <div class="col-xs-6 col-md-3">
+        <div class="container1 ">
+            <img src="https://thumbs.dreamstime.com/b/medical-professionals-icon-group-doctors-nurse-over-white-background-colorful-design-vector-illustration-85790508.jpg" class="img-fluid image rounded-top "  alt="Doctor Image">
+        <div class="middle">
+        <div class="text"><i class="fa fa-heartbeat animated infinite pulse" aria-hidden="true"></i> we are here to help you  <i class="fa fa-heartbeat animated infinite pulse" aria-hidden="true"></i> <br> Dr's : <small>"leo , semon , alex" </small> </div>
+        </div> 
+        </div>
+        </div>
+        {{!--  --}}
+        <div class="col-xs-6 col-md-3">
+        <div class="container1 ">
+        <img src="http://buysellgraphic.com/images/graphic_preview/large/female_doctor_icon_cartoon_character_design_30664.jpg" class="img-fluid rounded-top image"  alt="Doctor Image">    
+        <div class="middle">
+        <div class="text"><i class="fa fa-heartbeat animated infinite pulse" aria-hidden="true"></i> we are here to help you  <i class="fa fa-heartbeat animated infinite pulse" aria-hidden="true"></i>Dr:"catrena" </div>
+        </div> 
+        </div>  
+        </div>
+        {{!--  --}}
+
+        <div class="col-xs-6 col-md-3">
+        <div class="container1 ">
+        
+        <img src="https://thumbs.dreamstime.com/b/flat-icon-doctor-design-illustration-avatar-holding-clipboard-47170977.jpg" class="img-fluid rounded-top image"  alt="Doctor Image">
+        <div class="middle">
+        <div class="text"><i class="fa fa-heartbeat animated infinite pulse" aria-hidden="true"></i> we are here to help you  <i class="fa fa-heartbeat animated infinite pulse" aria-hidden="true"></i>Dr:"Obaida" </div>
+        </div> 
+        </div>
+        </div>                    
+    
+    
+    </div>
+
+</div>

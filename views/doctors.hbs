@@ -1,0 +1,42 @@
+
+
+        <div style="height:500px" class="jumbotron jumbback">
+            <h2 class="display-3 text-center">Thank's  for Your Trust</h2>
+            <h1 style="color:yellow; font:bold" class=" text-center">Select District to continue</h1>
+        </div>
+    
+<div class="container">
+    <div class="row">
+    
+ <div  class="col-xs-12 col-md-12">
+    <div class="nicediv"   style="margin: -20px  0 80px;">
+        <form action="/BrowseDoctors" method="post">
+        <div class="row">
+            <div class="col-xs-6 col-md-6">
+                <label class="tlt"> Dr District </label>
+                <select required class="form-control" name="country" >
+                    <option value="">.......</option>
+                {{# each Counts }}
+                    <option style="text-transform:capitalize" value="{{this.name}}">{{this.name}}</option>
+                {{/ each}}
+                </select>
+            </div>
+            <div class="col-xs-6 col-md-6">
+                <label class="tlt"> Dr Specialities </label>
+                
+                <select required class="form-control" name="category" >
+                <option value="">.......</option>
+                {{# each Cats }}
+                    <option style="text-transform:capitalize" value="{{this.name}}">{{this.name}}</option>
+                {{/ each}}
+            </select>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary  btn-lg" style=" top: 85px;position:  relative">Search <i class="fa fa-search" aria-hidden="true"></i></button>
+        </form>
+    </div>
+       
+    </div>
+    </div>
+</div>
+

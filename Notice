@@ -1,0 +1,14 @@
+<Project anlyze >
+1- this project produce find a doctor and that depend on your district and your category 
+2- search of doctors are aviliable for every one but contact with a doctor by our app should be logged in first
+3-i have collections for users , doctors  , district , categories , so search should be attach the 
+    district and category  and i have relation between district and category
+
+4- i have expressVladiator to get a valid data from user and i have some validate in server side regEXP
+
+5-i have passport and local strategy to loggedIn user 
+6- also we have add doctor so we need years of experience year of grads district area phone email a photo for him and a photo for his certificate category some details 
+
+
+
+</Project anlyze >

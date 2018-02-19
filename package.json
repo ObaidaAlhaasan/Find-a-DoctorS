@@ -1,0 +1,32 @@
+{
+  "name": "finddoc",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "~1.18.2",
+    "connect-flash": "*",
+    "cookie-parser": "~1.4.3",
+    "csurf": "^1.9.0",
+    "debug": "~2.6.9",
+    "express": "~4.15.5",
+    "express-messages": "*",
+    "express-session": "*",
+    "express-validator": "^4.3.0",
+    "express-validators": "^1.0.4",
+    "hbs": "~4.0.1",
+    "moment": "^2.20.1",
+    "mongodb": "*",
+    "mongoose": "^5.0.3",
+    "morgan": "~1.9.0",
+    "multer": "^1.3.0",
+    "nodemailer": "^4.4.2",
+    "nodemailer-sendgrid-transport": "^0.2.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "serve-favicon": "~2.4.5"
+  }
+}

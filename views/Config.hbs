@@ -1,0 +1,42 @@
+
+
+<div class="container">
+    <div class="row">
+    <div style="margin:60px auto;" class="col-xs-12 col-md-12">
+        
+    <div class="card text-white bg-info">
+    <img class="card-img-top" src="" alt="">
+    <div class="card-body">
+        <h4 class="text-center tlt  badge-secondary card-title">Config For ADDing Category || Country</h4>
+
+        <form method="post" action="/Config">
+        <div class="form-group">
+          <label class="badge-danger" for="">Category Name</label>
+          <input type="text" name="category" id="" class="form-control" placeholder="Category" aria-describedby="helpId">
+        </div>
+        
+        <div class="form-group">
+          <label class="badge-primary" for="">Country Name</label>
+          <input type="text" name="country" id="" class="form-control" placeholder="Country" aria-describedby="helpId">
+        </div>
+        
+        <input type="submit" value="ADD" class="btn btn-success">
+        </form>
+
+        <br>
+        <br>
+    {{#if errors}}
+
+    <div class="alert alert-danger animated bounceIn" role="alert">
+        <strong> {{errors.msg}} </strong>
+    </div>
+    {{/if}}
+    </div>
+    </div>
+
+    </div>
+
+
+    </div>
+</div>
+

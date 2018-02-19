@@ -1,0 +1,88 @@
+<!-- with wood border nice -->
+
+
+<div name="contact" class="fix-photo">
+  <div class="section section-full" >
+    <div class="overlay" style="opacity: 0.3; background-color: rgb(193, 193, 193);"></div>
+        <div class="container" style="max-width:900px; max-hieght:800px">
+            <div class="row">
+                <div class="col-xs-6 col-md-6  col-lg-6">
+                    <div class="address">
+                <h5 class="display-6 badge-info tlt "> <strong >Mr Obaida Alhassan :</strong>  Contact Me I am happy to hear you</h5>
+                <div>
+                    <strong  class=" alert badge-info">my E-mail</strong>
+                    <div class="alert badge-info">  
+                        alhydraaa616@gmail.com 
+                        <br>
+                        <br>Shadow616js@gmail.com 
+                        
+                        </div>
+
+                    <strong  class=" alert badge-info">my Phone Number</strong>
+                    <div class="alert badge-info">  
+                        00962788535526
+                        <br>
+                        
+                        </div>  
+                    <strong  class=" alert badge-info">my Address</strong>
+                    <div class="alert badge-info">  
+                      Jordan - Amman - JordanStreet
+                        <br>
+                        
+                        </div>                    
+                </div>
+                    </div>
+                </div>
+
+            <div class="col-xs-6 col-md-6 col-lg-6">
+
+                <div class="contactMe">
+                    <form action="/sendPost" method="post">
+                    <div class="form-group">
+                      <label  class=" badge-secondary" >Your Name  : </label>
+                      <input {{#if errors}} disabled="disabled"  {{/if}} minlength="3" required  type="text" name="name" class="form-control" placeholder="Enter Your Name please" >
+                    </div>
+                    <div class="form-group">
+                      <label  class=" badge-secondary" >Your E-mail</label>
+                      <input {{#if errors}} disabled="disabled"  {{/if}}   minlength="5" required  type="email" name="emailU" class="form-control" placeholder="Enter Your E-mail please" >
+                    </div>
+
+
+                    <div class="form-group">
+                      <label  class=" badge-secondary" >Your Message : </label>
+                      <textarea {{#if errors}} disabled="disabled"  {{/if}}  minlength="10" required name="message" class="form-control" placeholder="your Msg" cols="20" rows="5"></textarea>   
+                      <br>
+                    <button  {{#if errors}} disabled="disabled"  {{/if}} type="submit" class="btn badge-info btn-block"> Send </button>
+                      
+                    </div>
+                    </form>
+                 {{#if errors}}
+                    
+                <div class="alert alert-danger">
+                    <div class="has-error animated bounceIn " >
+                        <ul class="help-block  ">
+                                {{#each errors}}
+                                <li> {{this.msg}} </li>
+                                {{/each}}
+                        </ul>
+                        
+                        <button class="btn btn-sm btn-warning" onclick="ResubmitFormC()"> try again ? </button>
+                    
+                    </div>
+                </div>
+                {{/if}}
+                </div>
+            </div>
+
+        
+            </div>
+        </div>
+
+
+  </div>
+</div>
+
+
+
+
+ 

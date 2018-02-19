@@ -1,0 +1,100 @@
+<div style="background-color:silver">
+
+<div class="container">
+    <div class="row">
+
+            <div class="col-xs-12 col-md-12">
+
+
+            <div class="profile">
+            <div class="alert  badge-info"> <h2 > <small> You are welcome Mr : </small> <strong class="tlt">   {{#if errors }} User {{/if}} {{user.username}} </strong> <em>   Edit Your Profile it's always easy </em> </h2> </div>
+                <div class="row">
+                <div class="col-xs-8 col-md-8">
+                <form action="/profile" method="post">
+                
+                    <div class="form-group">
+                    <label class="badge-info " for=""> Edit Name </label>
+                    <input  {{#if errors }} placeholder="Name "  disabled="disabled" {{/if}} type="text" name="name"  class="form-control"  value="{{user.username}}" >
+                    </div>
+
+                    <div class="form-group">
+                    <label class="badge-info " for=""> Edit Email </label>
+                    <input  {{#if errors }}  disabled="disabled" placeholder="E-mail" {{/if}}  type="email" name="email"  class="form-control"  value="{{user.email}}" >
+                    </div>
+
+                    <div class="form-group">
+
+                    <label class="badge-info "  for=""> Enter your old  Password </label>
+                    <input {{#if errors }}  disabled="disabled" {{/if}} placeholder="if You Dont want Edit Your Password Leave this Field Please " type="password" name="old"  class="form-control"  >
+
+                    </div>
+                    
+                    <div class="form-group">
+
+                    <label class="badge-info " for=""> Enter your New   Password </label>
+                    <input {{#if errors }}  disabled="disabled" {{/if}} placeholder="if You Dont want Edit Your Password Leave this Field Please" type="password" name="password"  class="form-control"  >
+
+                    </div>
+                        <hr class="coloredHR">
+                    
+                    <div class="row">
+                        <br>
+                        <br>
+                    <div class="col-xs-4 col-md-4">
+
+                    <button {{#if errors }}  disabled="disabled" {{/if}} type="submit" class="alert btn-success  btn btn-block ">
+                        Save Changes <i class="fa fa-edit fa-fw fa-lg "></i>
+
+                   </button>           
+
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                        <a href="/" class="alert  btn-primary  btn btn-block ">
+                        Go Back  <i class="fa fa-arrow-circle-left"></i>
+                    </a>           
+                    </div>
+
+                    </div>
+                    </form>
+
+                </div>
+                <div class="col-xs-4 col-md-4">
+                    <div>
+
+                    <img style=" border:2px solid aqua; border-radius:15px; width:316px; height:289px  " src="{{#if user.image}} images/{{user.image}} {{else}} images/NoImage.png {{/if}}" class="img-fluid img-circle img-responsive" alt="DEMO IMAGE">
+                    </div>
+                    
+                    <form action="/profile/uploadImage"  method="post" enctype="multipart/form-data">
+                    
+                    <input style="margin-top:54px;"  type="file" name="avatar"  class="form-control">
+                    <br>
+                    <br>
+                    <br>
+                    <button style="margin-top:5px;" type="submit" class="alert btn btn-warning btn-block">ADD Photo</button>
+                    </form>
+
+
+                </div>
+                </div>
+                
+                {{# if errors}}
+                 <div class="has-error" style="border-left:5px solid aqua">
+                    <div class="alert alert-danger">
+                     <ul class="help-block" >
+                    {{#each errors}}
+                     <li class="alert-danger"> <strong> {{this.msg}}</strong> </li>
+                     <br>
+                    {{/each}}   
+                        <a href="/profile" class="badge-warning btn btn-sm">try again ?</a>
+                     </ul>
+                   
+
+                    </div>
+                  </div>
+
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+</div>

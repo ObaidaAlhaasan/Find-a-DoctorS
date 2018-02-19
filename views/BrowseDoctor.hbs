@@ -1,0 +1,71 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+
+            {{#if Docs}}
+            <table style="margin:50px auto ;" class="table table-hover table-inverse table-responsive">
+                <thead class="thead-inverse">
+                    <tr style="background:azure; border:2px solid aqua; font-size:16px; border-radius:2px;">
+                        <th >Dr Name</th>
+                        <th>Dr Phone Number</th>
+                        <th>Dr area Location</th>
+                        
+                        <th>Dr E-mail</th>
+                        <th>Dr Grads Year</th>
+                        <th> Pepole Rating </th>
+                        <th>Dr Time Working </th>
+                        <th>Dr Last Comment </th>
+                        <th>Dr Profile </th>
+                        
+                    </tr>
+                    </thead>
+                    <tbody>
+                        {{# each Docs}}
+                        
+                        <tr >
+                            <td>{{this.name}}</td>
+                            <td> 0{{this.number}} </td>
+                            <td>{{this.locationArea}} </td>
+                            
+                            <td>{{this.email}}</td>
+                            <td  data-gradz = "{{this.gradz}}" class="gradz"> {{this.gradz}} </td>
+
+                            <td data-rating="{{this.rating}}" style="color:gold" class="rating">
+                                {{this.rating}}
+                            </td>
+
+                            <td> {{workS}} AM  {{workE}} PM  </td>
+                            <td> {{this.comments}} </td>
+
+                            <td>
+                            <form action="/DoctorProfile" method="post">
+                            <input type="hidden" name="nameDoctor" value="{{this.name}}">
+
+                            <button type="submit" class="btn btn-sm btn-info">
+                             <strong style="font-size:15px">View Profile</strong>  
+                             <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                            </button> 
+                            
+                            </form>
+
+                             </td>
+                       
+                        </tr>
+                        {{/each}}
+
+                    </tbody>
+            </table>
+
+               {{else}}
+               <br>
+               <br> 
+                    <h2 class="text-center tlt ">No Doctors To Show </h2>
+                              <br>
+               <br>
+                    <hr class="coloredHR">
+     
+                    
+            {{/ if}}
+        </div>
+    </div>
+</div>

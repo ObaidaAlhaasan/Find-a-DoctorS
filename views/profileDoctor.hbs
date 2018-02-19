@@ -1,0 +1,223 @@
+<div class="container">
+
+<div class="row">
+<div class="col-xs-6 col-md-4">
+    <aside class="alert-info" style="margin: 20px -10px 0;">
+        <img  class="img-responsive img-rounded " src="../images/NoImage.png" alt="Demo Image">
+        
+        <br>
+        <br>
+        <hr class="coloredHR">
+        <div class="details">
+            <div >
+                <p>
+                <strong class="badge-light">Born Date :</strong><strong>12-12-2012 </strong>
+                </p>
+                <br>
+                <hr>
+                <p>
+                <strong class="badge-light">university gradz :</strong>
+                <strong>Jordan university</strong>
+                
+                </p>                        
+                    <br>
+                    <hr>
+                <p>
+                <strong class="badge-light">Nationalty :</strong><strong>Syrian</strong>
+                </p>
+                    <br>
+                    <hr>
+                <p>
+                <strong class="badge-light">WorkingTime :</strong><strong>{{Doc.workS}} AM - 
+                {{Doc.workE}} PM </strong>
+                </p>
+
+                                        
+            </div>
+        </div>
+    </aside>
+
+</div>
+<div style="margin: 20px -10px 0 0  ;" class="col-xs-6 col-md-8">
+    <div style="margin:0" class="heading alert btn-primary "> Dr Name : <strong class="tlt">{{Doc.name}} </strong>   
+    </div>
+    <div style=" margin-bottom:0" class="jumbotron">
+        <h5 class="display-5">About Doctor</h5>
+        <p class="lead"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui illum at ipsa porro tempora aliquid nemo placeat, tenetur ea consequatur hic dicta vitae optio commodi quisquam officiis quia expedita corrupti! </p>
+        <hr class="coloredHR">
+
+    </div>
+    <hr style="border:2px solid rgb(127, 228, 194)">
+    <div class="commentS">
+        <h3 class="card badge-secondary">Latest 5 Comments</h3>
+        <div class="c">
+            
+            {{# each Doc.comments}}
+            <div class="editComment"> 
+                <strong style="padding: 7px;background:cadetblue;font-size:15px;color:white;font-weight: bold;border-radius: 0px 30px 10px;">  
+                {{this.username}}
+                </strong>
+                <form  class="hiddenForm" action="/EditComment" method="post">
+
+                <p style="font-weight:bold; margin:15px 0;" class="lead appends clrearfix">
+
+                {{!--  inputs that compare toreturn apprear or not edit button --}}
+                <input type="hidden" class="userComment"  data-comment="{{this.username}}">
+
+                <p class="lead ">{{this.msg}} </p>
+                    <input type="hidden" name="nameUser" value="{{this.username}}">
+                    <input type="hidden" name="message" class="form-control" value="{{this.msg}}">
+                    <input type="hidden" name="nameDoc" class="nameDoc" value="">
+                </p>
+                </form>                   
+                
+            </div>
+            <hr>
+            
+            {{/each}}
+                {{!--  this important for comparing in jquery --}}
+                <input type="hidden" class="userNow"  data-now="{{user.username}}">
+                <input type="hidden" class="nameDoctor" name="nameDoctor" value="{{Doc.name}}">
+    
+        </div>
+    </div>
+</div>
+</div>
+<hr class="coloredHR">
+<div class="row">
+<div class="col-xs-6 col-md-4">
+
+    <h4> <span class="alert badge-pill badge-info"> Users Rating <i class="fa fa-star-half-full" aria-hidden="true"></i> </span> </h4>
+    
+    
+    <form action="/rating" method="post">
+    
+    <div style="padding:17px;" class=" alert r clearfix badge-secondary">
+        
+
+
+        <div style="color:gold" class="pull-left">
+        <label for="rating">
+
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i> 
+        </label>
+        <input type="radio" name="rating" value="5">
+        </div>
+
+        <strong class="pull-right">1000</strong> 
+        {{!--  --}}
+        <br>
+
+        <div style="position:relative;">
+
+        <div style="color:gold; position:absolute; left:0px">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <input type="radio" name="rating" value="4">
+        </div>
+        {{!--  --}}
+        </div>
+        <strong class="pull-right">200</strong> 
+        <br>    
+
+
+
+        <div style="color:gold" class="pull-left">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <input type="radio" name="rating" value="3">
+        </div>
+        <strong class="pull-right">200</strong> 
+        {{!--  --}}
+        <br>
+
+        <div style="color:gold" class="pull-left">
+            
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <input type="radio" name="rating" value="2">
+        </div>
+        <strong class="pull-right">200</strong> 
+        {{!--  --}}
+        <br>
+
+        <div style="color:gold" class="pull-left">
+            
+        <i class="fa fa-star"></i>
+        <input type="radio" name="rating" value="1">
+        </div>
+        <strong class="pull-right">200</strong> 
+        {{!--  --}}
+        <br>
+
+        <div  class="pull-left">
+        <label for="rating">
+            
+        <i class="fa fa-star-o"></i>
+        </label>
+        <input type="radio" name="rating" value="0">
+        </div>
+        <strong class="pull-right">500</strong> 
+        {{!--  --}}
+
+    </div>
+    <input type="hidden" name="name" value="{{Doc.name}}">
+    <button type="submit" style="margin: -16px 0 20px 0px;"  class="btn btn-warning btn-block">rating Doctor
+
+    </button>
+
+    </form>
+
+
+
+{{!-- 
+ --}}
+
+
+</div>
+<div class="col-xs-6 col-md-8">
+    <div >
+    <h4>
+        <span class="alert badge-pill badge-info">
+        Write Comment <i class="fa fa-fw fa-comments"></i>
+
+        </span>
+    </h4> 
+    </div>
+
+    <div class="comment" >
+         <form method="post" action="/comment">
+
+        <textarea required minlength="10" maxlength="80" placeholder="Your Comment Here" name="comment" style="border-radius: 0px 8px;border: 3px solid #3399f3;background: transparent;margin: 13px 0 0 ;" cols="20" rows="7" class="form-control"></textarea>  
+        <input type="hidden" name="name" value="{{Doc.name}}">            
+            <button type="submit" class="btn btn-primary btn-block">ADD a Comment <i class="fa fa-commenting" aria-hidden="true"></i></button>
+        </form>
+
+
+    </div>
+    <br>
+
+            {{# if errors }}
+            <div  class="has-error animated bounceIn">
+                <div class="alert alert-danger">
+                    <ul class="help-block">
+                    {{#each errors}}
+                        <li>  <strong> {{this.msg}} </strong> </li>
+                    {{/each}}
+                    </ul>
+                    
+                </div>
+            </div>
+        {{/if}}
+</div>
+
+</div>
+</div>

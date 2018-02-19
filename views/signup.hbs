@@ -1,0 +1,85 @@
+
+ <!--hero section-->
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-form-title" style="background-image: url(http://www.whitemossdental.co.uk/web/images/main_images/childsmile.jpg);">
+					<span class="login100-form-title-1 tlt">
+						Sign Up
+					</span>
+				</div>
+
+				<form class="login100-form validate-form" method="post" action="/signup">
+
+					<div class="wrap-input100 validate-input m-b-26" >
+						<span class="label-input100">Username</span>
+						<input   {{#if error }} disabled="disabled" {{/if}} {{#if errors }} disabled="disabled" {{/if}} class="input100" autocomplete="off" type="text" name="username" placeholder="Enter username" required>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-26" >
+						<span class="label-input100">E-mail  </span>
+						<input   {{#if error }} disabled="disabled" {{/if}} {{#if errors }} disabled="disabled" {{/if}} class="input100" autocomplete="off" type="email" name="email" placeholder="Enter username" required>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-18">
+						<span class="label-input100">Password </span>
+						<input   {{#if error }} disabled="disabled" {{/if}} {{#if errors }} disabled="disabled" {{/if}} class="input100" autocomplete="new-password" type="password" required name="password" placeholder="Enter password">
+					</div>
+                	<div class="wrap-input100 validate-input m-b-18">
+						<span class="label-input100">Confirm Password</span>
+						<input   {{#if error }} disabled="disabled" {{/if}} {{#if errors }} disabled="disabled" {{/if}} class="input100" autocomplete="new-password" type="password" required name="confirm" placeholder="Confirm Your password">
+					</div>
+                    <br>
+                    <br>
+					<div class="container-login100-form-btn">
+                        <input type="hidden" name="_csrf" value="{{csrfToken}}">
+						
+						<button   {{#if error }} disabled="disabled" {{/if}} {{#if errors }} disabled="disabled" {{/if}}    type="submit" class=" btn btn-success   login100-form-btn">
+							Login
+						</button>
+					</div>
+
+				</form>
+				<h5 style=" margin-top:-60px; padding:9px; margin-left:150px; margin-bottom:50px "> &nbsp;&nbsp;&nbsp; already Have an account <a href="/signin"> Sign in </a></h5>
+				
+	{{#if error }}
+    <div class="alert alert-danger" style="margin:  0; border-left: 5px solid aqua"> 
+        <div class="has-error">
+		{{error}}<button class="btn btn-warning  login100-form-btn btn-sm" onclick="ResubmitForm()">try again</button>
+		
+	</div>
+	</div>
+	{{/if}}
+
+	{{#if success}}
+	<div class="alert alert-success">
+		{{success}}
+	</div>
+	{{/if}}
+
+	{{#if errors}}
+
+    <div class="alert alert-danger" style="margin:  0; border-left: 5px solid aqua"> 
+        <div class="has-error">
+			<ul>
+	{{# each errors}}
+				
+				<li>
+			{{this.msg}}
+
+				</li>
+        {{/each}}
+				
+			</ul>
+		<button class="btn btn-warning btn-sm" onclick="ResubmitForm()">try again</button>
+			
+			
+			</div>
+    </div>
+    {{/if}}
+
+			</div>
+
+		</div>
+
+	</div>

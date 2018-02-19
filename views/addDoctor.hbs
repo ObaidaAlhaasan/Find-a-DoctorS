@@ -1,0 +1,231 @@
+<div class="over">
+
+<div class="container">
+    <div class="row justify-content-md-center">
+
+        <div class="col-xs-12 col-md-10 ">
+            <form  action="/addDoctor" method="post" class="addDoctor">
+            
+            <div>
+                <img  class = "img-responsive first" src="https://www.healthecareers.com/binaries/content/gallery/healthecareers-us-en/article-features/december-2016/alternative-healthcare-jobs.jpg" alt="Doctors image">
+
+                <h3> <strong class="tlt">
+                     we are so happy to join us</strong><small>you'r welcome Dr  <img style="width:40px;" src="https://cdn4.iconfinder.com/data/icons/Gifts/128/rose.png"> </small>   </h3>
+            </div>
+
+        <div class="col-xs-10 col-md-11">
+            <br>
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                <label  class="badge badge-light" for="name">Dr First Name :  </label>
+                <input  autocomplete="off" type="text" name="first" class="form-control" required placeholder="Name">
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                <label  class="badge badge-light" for="name">Dr Second Name :  </label>
+                <input  autocomplete="off" type="text" name="second" class="form-control" required placeholder="Name">
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                <label  class="badge badge-light" for="name">Dr Last Name :  </label>
+                <input  autocomplete="off" type="text" name="last" class="form-control" required placeholder="Name">
+                    </div>
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                <label  class="badge badge-light" for="name">Dr Born  Date :  </label>
+                <input  autocomplete="off" type="date" name="Born" class="form-control" required >
+                    </div>
+
+                    <div class="col-xs-4 col-md-4">
+                <label  class="badge badge-light" for="name">Dr Nationalty :  </label>
+                <input  autocomplete="off" type="text" name="national" class="form-control" required placeholder="Nationalty">
+                    </div>
+                    <div class="col-xs-4 col-md-4">
+                <label  class="badge badge-light" for="name">Dr Graduation  University Name  :  </label>
+                <input  autocomplete="off" type="text" name="university" class="form-control" required placeholder="University">
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                <label class="badge badge-light" for="email">Dr Email :  </label>
+                <input autocomplete="off" type="email" name="email" class="form-control" required placeholder="E-mail">
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+                <label class="badge badge-light" for="email">Dr Password :  </label>
+                <input autocomplete="new-password" type="password" name="password" class="form-control" required placeholder="password">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-6 col-md-6">
+                <label class="badge badge-light" for="number">Dr Phone Number :  </label>
+                <input type="number" name="number" class="form-control" required placeholder="Number: 00962-">
+                    </div>                
+            
+                    <div class="col-xs-6 col-md-6">
+                <label class="badge badge-light" for="area">Dr Location :  </label>
+                    
+                <input autocomplete="off" type="text" name="locationArea"  class="form-control" placeholder="Location" >
+                    </div>              
+            </div>
+
+
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+
+                <div class="col-xs-6 col-md-6">
+                <label class="badge badge-light" for="distrrict">Dr Country :  </label>
+                    
+                <select style="text-transform:capitalize" name="country"  required class="form-control">
+                    <option value="">............................</option>
+                {{# each Counts }}
+                    <option style="text-transform:capitalize" value="{{this.name}}">{{this.name}}</option>
+                {{/ each}}
+                    
+                    
+                </select>
+
+                </div>
+
+                <div class="col-xs-6 col-md-6">
+                <label class="badge badge-light" for="Specialities">Dr Specialities :  </label>
+                    
+                <select name="category"  required class="form-control">
+                    <option value="">............................</option>
+                    
+                {{# each Cats }}
+                    <option style="text-transform:capitalize" value="{{this.name}}">{{this.name}}</option>
+                {{/ each}}
+                </select>
+
+                </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+
+                <div class="col-xs-6 col-md-6">
+                <label class="badge badge-light" for="practice">Dr practice year :  </label>
+                    
+                <input required min="1" type="number" name="practice"  class="form-control" placeholder="Practice">
+                </div>
+
+                <div class="col-xs-6 col-md-6">
+                <label class="badge badge-light" for="gradz">Dr graduation year :  </label>
+                <input type="date" name="gradz"  class="form-control" placeholder="Practice">
+                </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+
+                <div class="col-xs-6 col-md-6">
+                <label class="badge badge-light" for="worktimeS">Dr Work Time Start AM:  </label>
+                    
+                <input type="time" name="workS"  class="form-control" >
+                </div>
+
+                <div class="col-xs-6 col-md-6">
+                <label class="badge badge-light" for="worktimeE">Dr Work Time End PM: </label>
+                <input type="time" name="workE"  class="form-control" >
+                </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+
+                <div class="col-xs-4 col-md-4">
+                <label class="badge badge-light" for="photo">Dr CV  : </label>
+                <input type="file" name="image"  class="form-control" >
+                </div>
+
+                <div class="col-xs-4 col-md-4">
+                <label class="badge badge-light" for="photo">Dr Image : </label>
+                <input type="file" name="image"  class="form-control" >
+                </div>
+                <div class="col-xs-4 col-md-4">
+                <label class="badge badge-light" for="certificate">Dr certificate Image : </label>
+                <input type="file" name="certificate"  class="form-control" >
+                </div>
+
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="row">
+
+
+                <div class="col-xs-12 col-md-12">
+                <label class="badge badge-light" for="certificate">Description About Dr    : </label>
+                    <textarea placeholder="About Dr" name="About"  class="form-control" cols="10" rows="5"></textarea>
+                </div>
+
+                </div>
+            </div>
+
+
+
+
+
+        <hr style="margin:30px 5px;" class="coloredHR">
+
+            <div class="form-group">
+                <div class="row">
+            
+                    <div class="col-xs-12 col-md-12">
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                    <input {{#if errors}} disabled="disabled" {{/if}} class="btn btn-block btn-info" type="submit" value="ADD a Doctor " >
+
+                    </div>
+                </div>
+            </div>
+
+
+            </div>
+
+            </form>
+            {{# if errors}}
+               <ul class="alert alert-danger ">
+
+                {{#each errors}}
+                    <li class="has-error animated bounceIn">
+                   <strong>
+                        {{this.msg}}
+                   </strong>
+                    </li>
+                    
+                {{/ each}}
+                <button class="btn btn-warning btn-sm" onclick="ResubmitFormADD()">try again</button>
+                
+               </ul>
+                
+            {{/if}}
+        </div>
+
+    </div>
+</div>
+
+    
+</div>
