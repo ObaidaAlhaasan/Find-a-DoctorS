@@ -23,11 +23,6 @@ passport.deserializeUser(function (id, done) {
 });
 
 
-
-
-
-
-
 passport.use('local.signin', new localStrategy({
 
   usernameField: "username",
@@ -65,7 +60,7 @@ passport.use('local.signin', new localStrategy({
   }
 
 
-  req.session.user = {username:user.username , id:user._id} ;
+  req.session.user = {username:user.username , id:user._id,image:user.image} ;
   
   return done(null , user);
 

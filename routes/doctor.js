@@ -5,7 +5,6 @@ var Doctor   = require("../models/doctor");
 
 
 
-
 function isLogedin(req, res, next) {
     if (req.isAuthenticated()) {
         return next();

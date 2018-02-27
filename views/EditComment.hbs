@@ -2,20 +2,20 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-xs-8 col-md-8" style="    margin: 50px auto;padding: 0px;border: 3px solid cadetblue;border-radius: 0 56px 0;box-shadow: 20px 20px 20px #45bf2a;">
+        <div class="col-xs-8 col-md-8" style="    margin: 50px auto;padding: 0px;border: 3px solid cadetblue;border-radius: 0 56px 0;box-shadow: 8px 8px 15px #6dcef5;">
             <form action="/EditCommentS" method="post" >
-            <h3  style="    margin: 0px 0 0px 0px;text-align: center;border-radius: 0 50px 0 0px;padding: 20px;width: 100%;" class=" alert-success"> we hope you are enjoing with us and we can help you </h3>
+            <h3  style="    margin: 0px 0 0px 0px;text-align: center;border-radius: 0 50px 0 0px;padding: 20px;width: 100%;" class=" alert-info"> we hope you are enjoing with us and we can help you </h3>
             <hr class="coloredHR">
             <div class="form-group">
             <label > <h3  style="margin-left: 26px !important;">      <strong  class="HEART badge-light ">  DoctorName: 
-                <span class="tlt"> {{Doc.name}}  </span> <i class="fa fa-heartbeat    "></i> </strong>  </h3> </label>
+                <span class="tlt"> {{Doc.name}}  </span> <i  style="color:#0d77a2" class="fa fa-heartbeat    "></i> </strong>  </h3> </label>
 
               <input type="hidden" name="nameDoc"  class="form-control"  value="{{Doc.name}}" >
                 <br>
             </div>
 
             <div class="form-group">
-            <label > <h3  style="margin-left: 26px !important;">   <strong   class=" HEART badge-light ">  Mr:  <span class="tlt"> {{nameUser}} </span><i class="fa fa-user-circle-o" aria-hidden="true"></i> </strong> </h3>  </label>
+            <label > <h3  style="margin-left: 26px !important;">   <strong   class=" HEART badge-light ">  Mr:  <span class="tlt"> {{nameUser}} </span><i  style="color:#0d77a2" class="fa fa-user-circle-o" aria-hidden="true"></i> </strong> </h3>  </label>
 
               <input type="hidden" name="nameUser"  class="form-control"  value="{{nameUser}}" >
 
@@ -23,14 +23,14 @@
 
             <div class="form-group">
             <label > <h3  style="margin-left: 26px !important;">  <strong    class=" HEART badge-light">Your Comment:  
-                <i class="fa fa-comments" aria-hidden="true"></i></strong> </h3> 
+                <i  style="color:#0d77a2" class="fa fa-comments" aria-hidden="true"></i></strong> </h3> 
             
             </label>
                 <input type="hidden" name="oldComment" value="{{messageDoc}}">
-              <input style="background: azure;border: 1px solid forestgreen;" type="text"  required  min="10" maxlength="80" name="message"  class="form-control"  value="{{messageDoc}}" >
+              <input style="background: rgb(219, 238, 247);border: 1px solid rgb(100, 168, 196);" type="text"  required  min="10" maxlength="80" name="message"  class="form-control"  value="{{messageDoc}}" >
 
             </div>
-                <button type="submit" class="btn btn-success pull-right">Save Changes <i class="fa fa-edit "></i> </button>
+                <button type="submit" class="btn btn-info pull-right">Save Changes <i class="fa fa-edit "></i> </button>
             </form>
         </div>
     </div>

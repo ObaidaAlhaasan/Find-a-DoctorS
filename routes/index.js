@@ -5,6 +5,7 @@ var Categories = require("../models/category");
 var Countries  = require("../models/country");
 var Doctor     = require("../models/doctor");
 var User       = require("../models/users");
+var Post       = require("../models/post");
 
 var nodemailer = require('nodemailer');
 var sgTransport = require('nodemailer-sendgrid-transport');
@@ -16,8 +17,9 @@ var sgTransport = require('nodemailer-sendgrid-transport');
 
 router.get("/" ,(req,res) => {
     var user = req.session.user ;
+    console.log(req.isAuthenticated() , "doc");
     
-    res.render("index" , {title:"Find-a-Doctor" , user:user});
+        res.render("index" , {title:"Find-a-Doctor" , user:user});
 });
 
 
@@ -34,13 +36,12 @@ router.get("/doctors" ,  (req,res) => {
                 throw err ;
             } else {
                 Counts = Data ;
-                 res.render("doctors" ,{title:"Find-a-Doctor" , Cats:Cats ,Counts : Counts});
+                var user = req.session.user ;
+                 res.render("doctors" ,{title:"Find-a-Doctor" ,user:user, Cats:Cats ,Counts : Counts});
             }
         }) ; 
        } 
     });
-
-
 });
 
 
@@ -232,7 +233,7 @@ router.post("/EditComment",(req,res,next) => {
         }
    
 });
-//  the route for completing edit comment user
+//  the route for completing  edit comment user
 
 router.post("/EditCommentS",(req,res,next) => {
    
@@ -252,32 +253,18 @@ router.post("/EditCommentS",(req,res,next) => {
                     res.location("/doctors");
                    res.redirect("/doctors");
                } else {
+                
+                Doc.comments.forEach(element => {
 
-                // Doc.comments.forEach(object => {
-                   
-                //     for (const key in object) {
-                //         if (object.hasOwnProperty(key)) {
-                //             const value = object[key];
-                            
-                //             if ( object["msg"]==oldComment && value == username) {
-                //                 object["msg"] = comment ;  
-                //             }
-                //         }
-                //     }
-                // });
-
-                Doc.comments.map(function (ele ,ind) {  
-                    console.log(ele["username"]);
-                    console.log(ele["msg"]);
-                    if (ele["username"] == username && ele["msg"] == oldComment) {
-                        ele["msg"] = comment ;
-                    }else{
-                        return ele ;
+                    if (element.msg === oldComment  && element.username == username) {
+                        element.msg = comment ;
+                        
+                    Doc.markModified('comments');
+                        
+                        return element ;                        
                     }
+                     return element ;
                 });
-
-
-
 
                 Doc.save(function (err , re) { 
                     if (err) {
@@ -300,14 +287,9 @@ router.post("/EditCommentS",(req,res,next) => {
 
 
 
-
-
-
-
-
 router.get("/Config" , isLogedin , (req,res) => {
-    //  check if admin how come to this route
-   res.render("/" , {title:"Config"}); 
+    //  check if admin who come to this route
+   res.render("Config" , {title:"Config"}); 
 });
 
 
@@ -430,10 +412,358 @@ router.post("/sendPost"  , (req,res , next) => {
             }
         });
         // for testing 
-        next();
+    } 
+
+});
+
+//  route test for feed back
+
+router.get('/feedback', (req, res) => {
+    var user = req.session.user ;   
+
+    
+        Post.find({}).sort({date:-1}).exec(function (err , POSTS) { 
+            if (err) {
+                console.log(err);                
+            }else{
+                if (req.isAuthenticated() && user) {
+
+                    res.render("feedback" , {posts:POSTS,user:user});
+                } else {
+                    res.render("feedback"  , {posts:POSTS});
+                }
+            }
+            
+        
+         });
+
+});
+
+router.post('/feedback', (req, res) => {
+    if (req.session.user) {
+        var username = req.session.user.username ,
+            title    = req.body.title,
+            post     = req.body.post ,
+            user     = req.session.user ;
+
+        req.checkBody("title" ,"title Is Required").notEmpty().isLength({min:6 , max:100}) ;
+        req.checkBody("post" ,"Post Is Required").notEmpty().isLength({min:10 , max:250}) ;
+        
+        var errors = req.validationErrors();
+
+
+        if (errors) {
+            res.render("feedback",{user:user , errors:errors});
+        } else {
+            
+            var newPost = new Post({
+                title:title ,
+                user:req.session.user.id,
+                username:req.session.user.username,
+                post:post
+            });
+            newPost.save(function (err,re) { 
+                if (err) {
+                    throw err ;
+                }
+            
+                res.location("/feedback");
+                res.redirect("/feedback");
+                
+
+            });
+
+        }
+
+    } else {
+        
+        res.location("/signin");
+        res.redirect("/signin");
+    }
+});
+
+
+router.get("/likepost/:id",(req,res,next) => {
+var user = req.session.user ;
+
+    if (req.isAuthenticated() && user && req.params.id) {
+        
+        Post.findOne({_id:req.params.id},function (err,data) { 
+            if (err) {
+                throw err;
+            } else {
+                if (data.dislike.includes(user.username)) {
+
+                    data.dislike.splice(data.dislike.indexOf(user.username),1);
+                    data.dislikes--;
+                    data.like.push(user.username);
+                    data.likes++ ;
+
+                } else {
+                    if (data.like.includes(user.username)) {
+                        next();
+                    } else {
+                        data.like.push(user.username);
+                        data.likes++ ;
+                    }
+                }
+            }
+
+            data.save(function (err,re) {
+                if (err) {
+                    throw err  ;
+                } else {
+                    res.location("/feedback");
+                    res.redirect("/feedback"); 
+                }
+               });
+
+         }); 
+
+
+    } else {
+        
+ res.location("/feedback");
+ res.redirect("/feedback");
+ 
     }
 
+});
 
+// 
+
+
+router.get("/dislikepost/:id",(req,res,next) => {
+    var user = req.session.user ;
+    
+        if (req.isAuthenticated() && user && req.params.id) {
+            
+            Post.findOne({_id:req.params.id},function (err,data) { 
+                if (err) {
+                    throw err;
+                } else {
+                    if (data.like.includes(user.username)) {
+    
+                        data.like.splice(data.like.indexOf(user.username),1);
+                        data.likes--;
+                        data.dislike.push(user.username);
+                        data.dislikes++ ;
+    
+                    } else {
+                        if (data.dislike.includes(user.username)) {
+                            next();
+                        } else {
+                            data.dislike.push(user.username);
+                            data.dislikes++ ;
+                        }
+                    }
+                }
+    
+                data.save(function (err,re) {
+                    if (err) {
+                        throw err  ;
+                    } else {
+                        res.location("/feedback");
+                        res.redirect("/feedback"); 
+                    }
+                   });
+    
+             }); 
+    
+    
+        } else {
+            
+     res.location("/feedback");
+     res.redirect("/feedback");
+     
+        }
+    
+    });
+
+    // ADD comment on post feed back
+
+    router.get("/postComment/:id",(req,res,next) => {
+       var user = req.session.user ;
+       
+       if (user && req.isAuthenticated()&& req.params.id) {
+           Post.findOne({_id:req.params.id},(err,data) => {
+               if (err) {
+                  console.log(err.message);
+                  
+                  res.location("/feedback");
+                  res.redirect("/feedback");
+                  
+               }else {
+               if (!data) {
+                res.location("/feedback");
+                res.redirect("/feedback");
+               } else {
+                   res.render("postComment",{data:data});
+               }
+            }
+               
+
+           });
+       } else {
+           res.location("/feedback");
+           res.redirect("/feedback");
+       }
+    });
+    // post comment 
+
+    router.post("/postComment",(req,res,next) => {
+
+        var user  = req.session.user ,
+            comment = req.body.comment,
+            postID  = req.body.postID ;
+
+            if (req.isAuthenticated() && user) {
+            Post.findOne({_id:postID},(err,post) => {
+                if (err) {
+                    console.log(err.message);
+                    
+                    res.location("/postComment/"+postID);
+                    res.redirect("/postComment/"+postID);
+                } else {
+                    if (!post) {
+                        res.location("/postComment/"+postID);
+                        res.redirect("/postComment/"+postID);
+                    } else {
+                    
+                    post.comments.push({username:user.username , msg:comment});
+                    post.comment++ ;
+                    post.save(function (err,re) { 
+                        if (err) {
+                            throw err ; 
+                        } else {
+                            res.location("/feedback");
+                            res.redirect("/feedback");
+                        }
+                     });
+                    }
+                }
+            });                
+            } else {
+                res.location("/postComment/"+postID);
+                res.redirect("/postComment/"+postID);
+            }
+    
+    });
+
+    //  delete post 
+
+    router.get("/deletepost/:id",(req,res,next) => {
+        var user = req.session.user ,
+
+            postID = req.params.id ;
+
+        // check for same username then delete post 
+        if (req.isAuthenticated() && user && postID) {
+            Post.findOneAndRemove({_id:postID},(err) => {
+                if (err) {
+                    throw err ;
+                } else {
+                    
+                    res.location("/feedback");
+                    res.redirect("/feedback");
+                    
+                }
+            });
+    
+        } else {
+            
+            res.location("/feedback");
+            res.redirect("/feedback");
+        }
+
+    });
+
+// route edit comment 
+
+
+router.get("/editPost/:id",(req,res,next) => {
+    var user = req.session.user ;
+    
+    if (user && req.isAuthenticated()&& req.params.id) {
+        Post.findOne({_id:req.params.id},(err,post) => {
+            if (err) {
+               console.log(err.message);
+               
+               res.location("/feedback");
+               res.redirect("/feedback");
+               
+            }else {
+            if (!post) {
+             res.location("/feedback");
+             res.redirect("/feedback");
+            } else {
+
+                res.render("postComment",{post:post});
+            
+            }
+         }
+            
+        });
+    } else {
+        res.location("/feedback");
+        res.redirect("/feedback");
+    }
+ });
+
+//  route  edit  post
+
+
+router.post('/editpost', (req, res) => {
+    var user = req.session.user ,
+        postID = req.body.postID,
+        oldpost = req.body.oldpost,
+        post   = req.body.post  ,
+        title  = req.body.title ;
+
+        if (user && req.isAuthenticated()) {
+            Post.findOne({_id:postID}, (err,data) => {
+                if (err) {
+                    console.log(err);
+                    res.location("/feedback");
+                    res.redirect("/feedback");
+                } else {
+                    if (!data) {
+                        res.location("/feedback");
+                        res.redirect("/feedback");
+                    } else {
+                        console.log(data.user== user.id);
+                        console.log(data.post == oldpost);
+                        
+                        
+                        if (data.user == user.id && data.post === oldpost) {
+                            data.post  = post ;
+                            data.title = title ;
+
+                            console.log(data);
+
+                            data.save(function (err,re) { 
+                                if (err) {
+                                    throw err ;
+                                } else {
+                                    console.log("success");
+                                    res.location("/feedback");
+                                    res.redirect("/feedback");
+                                }
+                             });
+                            
+                        } else {
+                            res.location("/feedback");
+                            res.redirect("/feedback");
+                        }
+                    }
+                }
+            });
+
+
+        } else {
+            res.location("/feedback");
+            res.redirect("/feedback");
+        }
 });
 
 
@@ -444,8 +774,6 @@ router.get("/logout", function (req, res, next) {
             res.redirect("/");  
 
 });
-
-
 
 
 

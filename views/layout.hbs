@@ -31,6 +31,8 @@
               <a class="nav-link" href="/doctors">Browse Doctors <i style="color:aqua" class="fa fa-fw fa-lg fa-heart"></i></a>
             </li>
         {{#if login}}
+
+            {{!-- {{else if session.Doctor}} --}}
             <li class="nav-item">
               <a class="nav-link" href="/addDoctor">ADD Doctor<i style="color:rgb(7, 32, 32)" class="fa fa-fw fa-lg fa-heart-o"></i></a>
             </li>
@@ -44,9 +46,15 @@
           <ul class="nav navbar-nav ml-auto">
 
 
-            <li class="nav-item"><a href="/profile" class="nav-link" > <i style="color:rgb(8, 8, 8)" class="fa fa-fw fa-lg fa-user-secret"></i>My Account</a> </li>
+            <li class="nav-item"><a href="/profile" class="nav-link" >
+            {{#if session.user.image}} <img style="width:30px; height:30px; border-radius:55px;" src="/images/{{session.user.image}}" alt=""> 
+
+              {{else}} <i class="fa fa-user-circle-o"></i>
+            {{/if}}      
+               My Account</a> </li>
 
             <li class="nav-item"><a href="/logout" class="nav-link" > <i style="color:rgb(226, 169, 64)" class="fa fa-fw fa-lg fa-sign-out"></i> Logout</a> </li>
+        
         {{else}}
             </ul>
         <ul class="nav navbar-nav ml-auto">
@@ -146,7 +154,7 @@
     {{!-- <script src="https://mdbootstrap.com/previews/docs/latest/js/mdb.min.js"></script>
     <script src="https://mdbootstrap.com/previews/docs/latest/js/jarallax.js"></script>
     <script src="https://mdbootstrap.com/previews/docs/latest/js/jarallax-video.js"></script> --}}
-    <script src="js/bundle.js"></script>
+    {{!-- <script src="js/bundle.js"></script> --}}
     <script src="js/lettering.js"></script>
     <script src="js/nicescroll.js"></script>
     <script src="js/textillate.js"></script>

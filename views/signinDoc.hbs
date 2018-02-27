@@ -1,0 +1,62 @@
+
+ <!--hero section-->
+	<div class="limiter">
+		<div class="container-login100">
+
+			<div class="wrap-login100">
+				<div class="login100-form-title" style="background-image: url(http://im.rediff.com/getahead/2015/nov/25smile.jpg);">
+				
+					<span class="login100-form-title-1 tlt">
+					Dr Sign In
+					</span>
+				</div>
+				<div>
+				{{!-- <h3 style="width:45%" class="loginDoctor btn btn-danger pull-left"> <a href="/signinDoctor">As a Doctor </a>  <i class="fa fa-heartbeat    "></i> </h3> --}}
+
+                <a href="/signin">   
+				<h3 style="width:45%"  class=" btn pull-right btn-success"> As a User <i class="fa fa-user-circle-o" aria-hidden="true"></i> </h3></a>
+				</div>
+
+                                {{!-- class for form formDoctor --}}
+				<form class=" login100-form validate-form" method="post" action="/signinDoctor">
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Doctor is required">
+						<span class="label-input100">Dr E-mail:</span>
+						<input  autocomplete="off" class="input100" type="email" name="email" placeholder="Enter Doctor E-mail">
+				 		<span class="focus-input100"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
+						<span class="label-input100">Dr Password</span>
+						<input autocomplete="new-password" class="input100" type="password" name="password" placeholder="Enter Dr password">
+						<span class="focus-input100"></span>
+					</div>
+                    <br>
+                    <br>
+					
+					<div class="container-login100-form-btn">
+						<button type="submit" class=" btn btn-info   login100-form-btn">
+							Login
+						</button>
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+					</div>
+                    <h5 style="margin:0; margin-top:40px; ">  Don't Have an account yet<a href="/signup"> Sign up </a></h5>
+				</form>
+
+
+		{{!-- form doctor --}}
+
+
+	{{# if messages}}
+	<div class="alert alert-danger"   style="
+    margin: 0;
+    border-left: 3px solid brown;
+    font-weight: bold;">
+        {{# each messages}}
+        <div class="has-error">{{this}}</div>
+        {{/each}}
+		{{/if}}
+    </div>
+			</div>
+		</div>
+	</div>
+	

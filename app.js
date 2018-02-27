@@ -23,7 +23,7 @@ var contact    = require("./routes/contact");
 var about      = require("./routes/about");
 var profile    = require ("./routes/profile");
 var doctor     = require("./routes/doctor");  
-
+var signinDoctor = require("./routes/signinDoctor");
 
 var app = express();
 
@@ -86,6 +86,8 @@ app.use(function (req, res, next) {
 
 app.use('/', index);
 app.use('/signin', signin);
+app.use('/signinDoctor', signinDoctor);
+
 app.use("/signup",signup);
 app.use("/about" , about);
 app.use("/contact" , contact);

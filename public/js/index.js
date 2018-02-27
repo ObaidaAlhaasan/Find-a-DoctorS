@@ -1,8 +1,12 @@
+
+
+
+
 $(document).ready(function () {
     'use strict';  
     // nice scrolling
 
-    $("html").niceScroll({
+    $("html, .commentS, .Scroll").niceScroll({
         cursorcolor:"silver",
         cursorwidth:"11px",
         cursorborder:"none",
@@ -29,6 +33,13 @@ $(document).ready(function () {
         $("body").find(".rating").each(function(){
             
         var r =  $(this).data("rating");
+            r = r.split(",");
+        var result = 0 ;
+            for (let i = 0; i < r.length; i++) {
+                r[i] =    parseInt(r[i]);
+                result += r[i] ;
+            }
+            r = Math.floor(result/5);
         if (r == 0) {
             $(this).html("<i class='fa fa-fw fa-star-o'></i>");
         } else if(r == 1) {
@@ -46,17 +57,48 @@ $(document).ready(function () {
 
     });
         
+    $("body").find(".showcomments").each(function () {
+       console.log( $(this).data("showcomments") );
+        
+    });
+    
+
     $("body").find(".gradz").each(function () { 
+
         var arr = $(this).data("gradz").split(" ");
         var str = arr.splice(0,4).join("-");
         str  = str.slice(4,str.length);
         $(this).html(str);
     });
+
     }
     FFIXX();
 
-    // about page function to dropdown and up he question and answer 
+    // function display btns in feedback 
 
+    $(".notsame").hide();
+    $(".sameuser").hide();            
+    
+   
+    $(".ifsameuser").each(function () {
+        // element == this
+        if ($(this).data("ifsameuser").trim() === $(".Same").data("sameuser").trim()) {
+
+            $(this).parents(".appendtome").find(".sameuser").show();
+
+        } else {
+            $(this).parents(".appendtome").find(".notsame").show();
+            
+        }
+        
+    });
+
+
+
+
+
+
+    // about page function to dropdown and up the question and answer 
 
     $(".question").each(function () { 
         
@@ -96,7 +138,17 @@ $(document).ready(function () {
 
         $(".nameDoc").val($(".nameDoctor").val());
 
-  // End Of jquery       
+        $(".postComments").hide();
+
+        $(".showComments").each(function () { 
+            $(this).click(function () { 
+                $(this).siblings(".postComments").fadeToggle();
+             });
+         });
+
+
+
+         // End Of jquery       
 });
 
 
@@ -113,3 +165,19 @@ function ResubmitFormC() {
   }
 
 
+//   $(window).ready(function(){
+
+//     $("body").css("overflow","auto");
+    
+    
+    
+//     $(".loadingg h1").fadeOut(250,function(){
+//         $(this).parent().fadeOut(400,function(){
+    
+//             $(this).remove();
+    
+    
+//         });
+//     });
+    
+//     });

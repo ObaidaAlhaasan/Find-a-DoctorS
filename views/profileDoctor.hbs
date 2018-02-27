@@ -11,19 +11,19 @@
         <div class="details">
             <div >
                 <p>
-                <strong class="badge-light">Born Date :</strong><strong>12-12-2012 </strong>
+                <strong class="badge-light">Birth Date :</strong><strong data-gradz="{{Doc.Born}}" class="gradz"> </strong>
                 </p>
                 <br>
                 <hr>
                 <p>
                 <strong class="badge-light">university gradz :</strong>
-                <strong>Jordan university</strong>
+                <strong>{{Doc.university}}</strong>
                 
                 </p>                        
                     <br>
                     <hr>
                 <p>
-                <strong class="badge-light">Nationalty :</strong><strong>Syrian</strong>
+                <strong class="badge-light">Nationalty :</strong><strong>{{Doc.national}}</strong>
                 </p>
                     <br>
                     <hr>
@@ -43,13 +43,14 @@
     </div>
     <div style=" margin-bottom:0" class="jumbotron">
         <h5 class="display-5">About Doctor</h5>
-        <p class="lead"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui illum at ipsa porro tempora aliquid nemo placeat, tenetur ea consequatur hic dicta vitae optio commodi quisquam officiis quia expedita corrupti! </p>
+        <p class="lead"> {{Doc.About}} </p>
         <hr class="coloredHR">
 
     </div>
     <hr style="border:2px solid rgb(127, 228, 194)">
+        <h3 class="card badge-secondary">Latest  Comments</h3>
+    
     <div class="commentS">
-        <h3 class="card badge-secondary">Latest 5 Comments</h3>
         <div class="c">
             
             {{# each Doc.comments}}
@@ -92,7 +93,7 @@
     
     <form action="/rating" method="post">
     
-    <div style="padding:17px;" class=" alert r clearfix badge-secondary">
+    <div style="padding:15px;" class=" alert r clearfix badge-secondary">
         
 
 
@@ -177,11 +178,6 @@
     </form>
 
 
-
-{{!-- 
- --}}
-
-
 </div>
 <div class="col-xs-6 col-md-8">
     <div >
@@ -196,7 +192,7 @@
     <div class="comment" >
          <form method="post" action="/comment">
 
-        <textarea required minlength="10" maxlength="80" placeholder="Your Comment Here" name="comment" style="border-radius: 0px 8px;border: 3px solid #3399f3;background: transparent;margin: 13px 0 0 ;" cols="20" rows="7" class="form-control"></textarea>  
+        <textarea required minlength="10" maxlength="80" placeholder="Your Comment Here" name="comment" style="border-radius: 0px 8px;border: 3px solid #3399f3;background: transparent;margin: 13px 0 0 ;" cols="20" rows="6" class="form-control"></textarea>  
         <input type="hidden" name="name" value="{{Doc.name}}">            
             <button type="submit" class="btn btn-primary btn-block">ADD a Comment <i class="fa fa-commenting" aria-hidden="true"></i></button>
         </form>

@@ -14,7 +14,6 @@
                         <th>Dr Grads Year</th>
                         <th> Pepole Rating </th>
                         <th>Dr Time Working </th>
-                        <th>Dr Last Comment </th>
                         <th>Dr Profile </th>
                         
                     </tr>
@@ -30,12 +29,11 @@
                             <td>{{this.email}}</td>
                             <td  data-gradz = "{{this.gradz}}" class="gradz"> {{this.gradz}} </td>
 
-                            <td data-rating="{{this.rating}}" style="color:gold" class="rating">
+                            <td data-rating="{{this.ratingUsers}}" style="color:gold" class="rating">
                                 {{this.rating}}
                             </td>
 
                             <td> {{workS}} AM  {{workE}} PM  </td>
-                            <td> {{this.comments}} </td>
 
                             <td>
                             <form action="/DoctorProfile" method="post">

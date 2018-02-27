@@ -1,0 +1,95 @@
+{{#if data}}
+    <div class="container">
+    <div class="row">
+        <div class="col-xs-8 col-md-8" style="    margin: 50px auto;padding: 0px;border: 3px solid cadetblue;border-radius: 0 56px 0;box-shadow: 8px 8px 15px #6dcef5;">
+            <form action="/postComment" method="post" >
+            <h3  style="    margin: 0px 0 0px 0px;text-align: center;border-radius: 0 50px 0 0px;padding: 20px;width: 100%;" class=" alert-info"> Be Happy ! </h3>
+            <hr class="coloredHR">
+
+
+            <div class="form-group">
+            <label > <h3  style="margin-left: 26px !important;">      <strong  class=" badge-light "> Posted By : 
+                <span > {{data.username}}  </span> <i  style="color:#0d77a2" class="fa fa-beat    "></i> </strong>  </h3> </label>
+
+                <br>
+            </div>
+
+
+            <div class="form-group">
+            <label > <h3  style="margin-left: 26px !important;">      <strong  class=" badge-light "> Title: 
+                <span > {{data.title}}  </span> <i  style="color:#0d77a2" class="fa fa-beat    "></i> </strong>  </h3> </label>
+
+                <br>
+            </div>
+
+            <div class="form-group">
+
+            <label > <h3  style="margin-left: 26px !important;">   <strong   class="  badge-light ">  Post :  </strong> </h3>  </label>
+            <p style="word-wrap:break-word;margin-left:26px;"> {{data.post}} </p>
+            <hr>
+            </div>
+
+            <div class="form-group">
+            <label > <h3  style="margin-left: 26px !important;">  <strong    class="  badge-light">Your Comment:  
+                <i  style="color:#0d77a2" class="fa fa-comments" aria-hidden="true"></i>
+                <input type="hidden" name="postID" value="{{data._id}}">
+                </strong> </h3> 
+            
+            </label>
+
+              <input placeholder="Comment" style=" height:50px; background: rgb(219, 238, 247);border: 1px solid rgb(100, 168, 196);" type="text"  required="required"  minlength="3" maxlength="80" name="comment"  class="form-control" >
+
+            </div>
+
+                <button style="margin: 0 0 30px 5px;" type="submit" class="btn btn-info">post Comment <i class="fa fa-comment "></i> </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{{else if post }}
+    {{!--  if post  --}}
+   
+<div class="container">
+    <div class="row">
+        <div class="col-xs-8 col-md-8" style="    margin: 50px auto;padding: 0px;border: 3px solid cadetblue;border-radius: 0 56px 0;box-shadow: 8px 8px 15px #6dcef5;">
+            <form action="/editpost" method="post" >
+            <h3  style="    margin: 0px 0 0px 0px;text-align: center;border-radius: 0 50px 0 0px;padding: 20px;width: 100%;" class=" alert-info"> Edit Post <small>it's always easy</small> </h3>
+            <hr class="coloredHR">
+            <div class="form-group">
+            <label > <h3  style="margin-left: 26px !important;">      <strong  class="HEART badge-light ">
+                <span class="tlt"> Edit title: </span>
+                <i style="color:rgb(27, 112, 146)" class="fa fa-file-text-o" aria-hidden="true"></i>
+                 </strong>  
+                 
+                 </h3> 
+                 
+                 </label>
+                    <input style="background: rgb(219, 238, 247);border: 1px solid rgb(100, 168, 196);" type="text"  required="required"   name="title"  class="form-control"  value="{{post.title}}" >
+                <br>
+            </div>
+
+
+            <div class="form-group">
+            <label > <h3  style="margin-left: 26px !important;">  <strong    class=" HEART badge-light">Edit Your Post:  
+                <i  style="color:#0d77a2" class="fa fa-edit" aria-hidden="true"></i></strong> </h3> 
+            
+            </label>
+
+                <input type="hidden" name="oldpost" value="{{post.post}}">
+                <input type="hidden" name="postID" value="{{post._id}}">
+
+              <input style="background: rgb(219, 238, 247);border: 1px solid rgb(100, 168, 196);" type="text"  required="required"   name="post"  class="form-control"  value="{{post.post}}" >
+
+            </div>
+                <button type="submit" class="btn btn-info pull-right">Save Changes </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+    {{else}}
+        <h1>Error 404: Access Denied ! </h1>
+
+{{/if}}

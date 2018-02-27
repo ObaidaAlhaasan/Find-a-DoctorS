@@ -1,6 +1,6 @@
 
-{{!-- https://www.youtube.com/watch?v=4gHsS489nHw --}}
-<div class="view hm-white-light jarallax" data-jarallax='{"speed": 0.2}' data-jarallax-video="#">
+{{!-- --}}
+<div class="view hm-white-light jarallax" data-jarallax='{"speed": 0.2}' data-jarallax-video="https://www.youtube.com/watch?v=4gHsS489nHw ">
     <div class="full-bg-img">
         <div class="container flex-center">
             <div class="row">
@@ -31,44 +31,7 @@
 
     </div>
 </div>
-
- <div class="container">
-    <hr class = "coloredHRR">
-     
-     <div class="row">
- <div class="col-xs-12 col-md-12">
-    <div class="nicediv">
-        <form action="/doctors" method="post">
-        <div class="row">
-            <div class="col-xs-6 col-md-6">
-                <label class="tlt"> Your District </label>
-                <select required class="form-control" name="district" >
-                    <option value="">.......</option>
-                {{# each District }}
-                    <option style="text-transform:capitalize" value="{{this.name}}">{{this.name}}</option>
-                {{/ each}}
-                </select>
-            </div>
-            <div class="col-xs-6 col-md-6">
-                <label class="tlt"> Your Specialities </label>
-                
-                <select required class="form-control" name="category" >
-                <option value="">.......</option>
-                {{# each category }}
-                    <option style="text-transform:capitalize" value="{{this.name}}">{{this.name}}</option>
-                {{/ each}}
-            </select>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary ">Search <i class="fa fa-search" aria-hidden="true"></i></button>
-        </form>
-    </div>
-       
-</div>
-     </div>
- </div>
-
-
+    <hr class = "coloredHR">
 </div>
 </div>
 
@@ -97,7 +60,7 @@
     <div class="row widthImage">
         <div class="col-xs-6 col-md-3">
         <div class="container1 ">
-            <img src="https://thumbs.dreamstime.com/b/medical-professionals-icon-group-doctors-nurse-over-white-background-colorful-design-vector-illustration-85791519.jpg" class="img-fluid  rounded-top image" alt="Doctor image">
+            <img style="width:278px" src="https://thumbs.dreamstime.com/b/medical-professionals-icon-group-doctors-nurse-over-white-background-colorful-design-vector-illustration-85791519.jpg" class="img-fluid  rounded-top image" alt="Doctor image">
         <div class="middle">
         <div class="text"><i class="fa fa-heartbeat animated infinite pulse" aria-hidden="true"></i> we are here to help you  <i class="fa fa-heartbeat animated infinite pulse" aria-hidden="true"></i> <br> team </div>
         </div> 

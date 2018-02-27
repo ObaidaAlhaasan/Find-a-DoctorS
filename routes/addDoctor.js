@@ -7,9 +7,9 @@ var Categories = require("../models/category");
 var Countries  = require("../models/country");
 var Doctor     = require("../models/doctor");
 
-var csruf = require("csurf");
-var csurfProtection = csruf();
-router.use(csurfProtection);
+// var csruf = require("csurf");
+// var csurfProtection = csruf();
+// router.use(csurfProtection);
 
 
 router.get("/",(req,res,next) => {
@@ -25,7 +25,8 @@ router.get("/",(req,res,next) => {
              throw err ;
          } else {
              Counts = Data ;
-              res.render("addDoctor" ,{title:"Find-a-Doctor" , csrfToken:req.csrfToken() ,Cats:Cats ,Counts : Counts});
+            //  , csrfToken:req.csrfToken() 
+              res.render("addDoctor" ,{title:"Find-a-Doctor" ,Cats:Cats ,Counts : Counts});
          }
      }) ; 
         
@@ -35,7 +36,10 @@ router.get("/",(req,res,next) => {
 });
 
 router.post("/"  , (req,res,next) => {
-  var name    = req.body.name ,
+
+
+
+  var name    = req.body.first+" " +req.body.second+" " +req.body.last ,
       email   = req.body.email,
       password  = req.body.password ,
       number    = req.body.number ,
@@ -47,9 +51,27 @@ router.post("/"  , (req,res,next) => {
       workE     = req.body.workE  ,
       locationArea  = req.body.locationArea,
       image     = req.body.image ,
-      certificate = req.body.certificate ;
+      certificate = req.body.certificate ,
+      Born        = req.body.Born,
+      national    = req.body.national,
+      university  = req.body.university,
+      About       = req.body.About   ;
 
-      req.checkBody("name" ,"Name Is Required AND Alpha String").notEmpty().isAlpha().isLength({min:4,max:40});
+    //   for testing 
+    var first = req.body.first ,
+        second = req.body.second,
+        last   = req.body.last ;
+     
+      req.checkBody("Born","Born Date Is Required ").notEmpty();
+      req.checkBody("national","Nationalty   Is Required ").notEmpty();
+      req.checkBody("university","university Name  Is Required ").notEmpty();
+      req.checkBody("About","About  Is Required ").notEmpty();
+
+      
+      req.checkBody("first" ,"First Name Is Required AND Alpha String").notEmpty().isLength({min:2,max:20});
+      req.checkBody("second" ,"Second Name Is Required AND Alpha String").notEmpty().isLength({min:2,max:20});
+      req.checkBody("last" ,"Last Name Is Required AND Alpha String").notEmpty().isLength({min:2,max:20});
+
       req.checkBody("email" ,"E-mail Is Required AND  Valid E-mail").notEmpty().isEmail();
       req.checkBody("password" ,"Password Is Required AND  Valid password").notEmpty().matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}/);
       req.checkBody("number" ,"MobileNumber Is Required Valid MobileNumber").notEmpty().isMobilePhone("ar-JO");
@@ -74,11 +96,13 @@ router.post("/"  , (req,res,next) => {
                 res.render("addDoctor" , {errors:errors , name:name,email:email,password:password,practice:practice,gradz:gradz , category:category , country:country,workE:workE,workS:workS,locationArea:locationArea,number:number});
                 } else {
 
-                    
-
                   var newDOCTOR = new Doctor({
                     name:name,
                     email:email,
+                    Born  : Born ,
+                    national :national,
+                    university:university,
+                    About:About,
                     password:password,
                     number:number,
                     category:category ,

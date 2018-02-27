@@ -1,0 +1,148 @@
+{{#if user}}
+<div class="container ">
+    <div class="row">
+            <div style="background: #B6E1F2;
+border: 1px solid cornflowerblue;
+width: 100%;margin:60px 0 -50px;
+border-radius: 20px 3px 22px;">
+            <h2 class=" text-center"><strong >Feed Back</strong></h2>
+            </div>
+        <div  style="margin:60px auto;  margin: 60px auto;max-height: 600px;overflow-y: scroll;border: none;box-shadow: 6px 6px 5px #AEE5FF;border-radius: 22px;word-wrap: break-word;; padding: 0px;border-left:1px dotted skyblue; "class="col-xs-7 col-md-7 Scroll">
+
+          
+            {{#each posts}}
+            <div class="appendtome">
+
+        <h4 class="clearfix  alert alert-info">
+
+                <strong class="ifsameuser" data-ifsameuser="{{this.username}}" class="pull-left"> {{this.username}} </strong>      <small data-gradz="{{this.date}}" class="gradz pull-right"></small> </h4>
+        <h5> <strong class="badge-light">Title: {{this.title}}</strong> </h5>
+
+        <p class="lead">  {{this.post}} </p>
+        <div> 
+            <strong> {{this.likes}}  <i style="color:rgb(89, 165, 231)" class="fa fa-thumbs-up" aria-hidden="true"></i></strong> 
+            &nbsp; 
+            <strong> {{this.dislikes}} <i style="color:#C96F00" class="fa fa-thumbs-down" aria-hidden="true"></i></strong>
+            &nbsp; 
+            <strong class="showComments" style="cursor:pointer"> {{this.comment}} <i style="color:rgb(72, 127, 185)" class="fa fa-comments" aria-hidden="true"> </i></strong>  
+            &nbsp; 
+            <div style="background:linear-gradient(rgb(250, 255, 255),azure);padding:5px" class="postComments">
+                {{#each this.comments  }}
+                   <strong style="border-radius: 3px 15px 3px 15px;padding: 3px;" class="badge-secondary">{{this.username}}</strong> <h6 >{{this.msg}}</h6>
+                   <br>
+                {{/each}}
+            </div>
+        </div>
+            <br>
+        
+        <div>   
+                
+
+                {{#if user}}
+                <div class="sameuser">
+
+                <a href="/editPost/{{this._id}}" class="btn btn-sm btn-success">Edit <i class="fa fa-pencil    "></i> </a>
+
+                <a href="/deletepost/{{this._id}}" class="btn btn-sm btn-danger">Delete <i class="fa fa-close" aria-hidden="true"></i> </a>
+
+                <a href="/postComment/{{this._id}}" class="btn btn-sm btn-primary">Comment <i class="fa fa-commenting" aria-hidden="true"></i> </a>
+                </div>
+
+                <br>
+                <div class="notsame">
+                    
+                <a href="/likepost/{{this._id}}" class="btn btn-sm btn-info">Like <i class="fa fa-thumbs-o-up   "></i></a>
+
+                <a href="/dislikepost/{{this._id}}" class="btn btn-sm btn-warning">Dislike <i class="fa fa-thumbs-o-down" aria-hidden="true"></i> </a>
+
+                <a href="/postComment/{{this._id}}" class="btn btn-sm btn-primary">Comment <i class="fa fa-commenting" aria-hidden="true"></i> </a>
+                </div>
+                
+                {{/if}}
+            </div>
+        <hr>
+            </div>
+        
+            {{/each}}
+            <input type="hidden" data-sameuser="{{session.user.username}}" class="Same">
+        </div>
+        
+        <div style="margin:70px auto;" class="col-xs-5 col-md-5">
+        {{#if user }}
+            
+            <form style="background: linear-gradient\(lightblue,aliceblue;background: linear-gradient(to right,skyblue,aliceblue);box-shadow: 5px 6px 12px #99CCFF;"  action="/feedBack" method="post">
+            <br>    
+            <h5 style="border-left:3px solid; width:180px; border-radius:3px 3px  20px;  padding:2px; background:lightblue;"> <strong class="tlt">Post Title:</strong> </h5>
+        
+            <input name="title" type="text"  class="form-control">
+            <br>
+                <h1>
+                    
+                </h1>
+            <h5  style="border-left:3px solid;   width:180px; border-radius:3px 3px  20px;  padding:2px; background:lightblue;" ><strong class="tlt">  Post Body:   </strong></h5>
+            <br>
+            <textarea name="post" style="height: 200px;" type="text" class="form-control"> </textarea>
+            <button class="btn btn-info btn-sm btn-block"> ADD Post <i class="fa fa-paper-plane-o" aria-hidden="true"></i> </button>
+            </form>
+            {{#if errors}}
+            <div class="alert alert-danger">
+                <ul class="has-error">
+        
+                    {{#each errors}}
+
+                        <li><strong>  
+                         {{this.msg}}
+                        </strong></li>
+
+
+                    {{/each}}
+                </ul>
+            </div>
+        
+            {{/if}}
+        {{/if }}
+            
+        </div>
+
+
+
+    </div>
+    </div>
+    {{else}}
+    <div class="container">
+    <div class="row">
+            <div style="background: #B6E1F2;
+                 border: 1px solid cornflowerblue;
+                 width: 100%;margin:60px 0 -50px;
+                 border-radius: 20px 3px 22px;">
+                <h2 class=" text-center"><strong >Feed Back</strong></h2>
+            </div>
+        <div  style="margin:60px auto;  margin: 60px auto;max-height: 600px;overflow-y: scroll;border: none;box-shadow: 6px 6px 5px #AEE5FF;border-radius: 22px;padding: 0px;border-left:1px dotted skyblue; "class="col-xs-12 col-md-12 Scroll">
+
+          
+        {{#each posts}}
+
+            <h4 class="clearfix  alert alert-info"><strong class="pull-left"> {{this.username}} </strong>      <small data-gradz="{{this.date}}" class="gradz pull-right"></small> </h4>
+        <h5> <strong class="badge-light">Title: {{this.title}}</strong> </h5>
+
+        <p class="lead">  {{this.post}} </p>
+        <div> 
+            <strong> 20  <i style="color:rgb(89, 165, 231)" class="fa fa-thumbs-up" aria-hidden="true"></i></strong> 
+            &nbsp; 
+            <strong> 5 <i style="color:#C96F00" class="fa fa-thumbs-down" aria-hidden="true"></i></strong>
+            &nbsp; 
+            <strong> 4 <i style="color:rgb(72, 127, 185)" class="fa fa-comments" aria-hidden="true"> </i></strong>  
+            &nbsp; 
+        </div>
+            <br>
+        
+        <hr>
+        
+            {{/each}}
+
+        </div>
+        
+    </div>
+</div>
+
+{{/if}}
