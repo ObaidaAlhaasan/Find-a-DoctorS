@@ -393,7 +393,7 @@ router.post("/sendPost"  , (req,res , next) => {
         // use sendgrid to send email 
         var options = {
             auth: {
-                api_key: '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'
+                api_key: ""
             }
         } ;
     
