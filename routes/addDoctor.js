@@ -6,6 +6,7 @@ var passport = require("passport");
 var Categories = require("../models/category");
 var Countries  = require("../models/country");
 var Doctor     = require("../models/doctor");
+var User       = require("../models/users");
 
 // var csruf = require("csurf");
 // var csurfProtection = csruf();
@@ -95,7 +96,7 @@ router.post("/"  , (req,res,next) => {
                     var errors = [{msg:"Doctor Name ALready exists ??? "}];
                 res.render("addDoctor" , {errors:errors , name:name,email:email,password:password,practice:practice,gradz:gradz , category:category , country:country,workE:workE,workS:workS,locationArea:locationArea,number:number});
                 } else {
-
+                    
                   var newDOCTOR = new Doctor({
                     name:name,
                     email:email,
@@ -111,21 +112,35 @@ router.post("/"  , (req,res,next) => {
                     gradz:gradz , 
                      workE:workE,
                      workS:workS,
-                     locationArea:locationArea,
+                     locationArea:locationArea
                   });
 
                   newDOCTOR.password = newDOCTOR.encryptPassword(password);
                 
-                  newDOCTOR.save(function (err) { 
-                      if (err) {
-                          throw err ;
-                      }
+                  newDOCTOR.save().then(function () {
+                        User.findOne({username:req.user.username}).exec(function (err,user) { 
+                            if (err) {
+                                throw err ;
+                            } else {
+                                if (!user) {
+                                    res.location("/signin");
+                                    res.redirect("/signin");
+                                } else {
+                                    user.isDoctor = true ;
+                                    user.DoctorID = newDOCTOR._id ;
+                                    user.image  = newDOCTOR.image ;
+                                    user.save(function (err,resa) {
+                                        if (err) {
+                                            throw err;
+                                        }
+                                        res.location("/doctors");
+                                        res.redirect("/doctors");
 
-                      res.location("/doctors");
-                      res.redirect("/doctors");
-                      
-
-                   });
+                                      });
+                                }
+                            }
+                         }) ;
+                     });
 
                 }
             }            

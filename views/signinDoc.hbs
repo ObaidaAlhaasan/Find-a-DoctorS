@@ -18,23 +18,23 @@
 				</div>
 
                                 {{!-- class for form formDoctor --}}
-				<form class=" login100-form validate-form" method="post" action="/signinDoctor">
-					<div class="wrap-input100 validate-input m-b-26" data-validate="Doctor is required">
-						<span class="label-input100">Dr E-mail:</span>
-						<input  autocomplete="off" class="input100" type="email" name="email" placeholder="Enter Doctor E-mail">
+				<form class=" formUser login100-form validate-form" method="post" action="/signin">
+					<div class="wrap-input100 validate-input m-b-26" data-validate="Username is required">
+						<span class="label-input100">Dr : Username</span>
+						<input  class="input100" type="text" name="username" placeholder="Enter username">
 				 		<span class="focus-input100"></span>
 					</div>
 
 					<div class="wrap-input100 validate-input m-b-18" data-validate = "Password is required">
-						<span class="label-input100">Dr Password</span>
-						<input autocomplete="new-password" class="input100" type="password" name="password" placeholder="Enter Dr password">
+						<span class="label-input100">Dr: Password</span>
+						<input autocomplete="on" class="input100" type="password" name="password" placeholder="Enter password">
 						<span class="focus-input100"></span>
 					</div>
                     <br>
                     <br>
 					
 					<div class="container-login100-form-btn">
-						<button type="submit" class=" btn btn-info   login100-form-btn">
+						<button type="submit" class=" btn btn-success   login100-form-btn">
 							Login
 						</button>
                     <input type="hidden" name="_csrf" value="{{csrfToken}}">
@@ -51,9 +51,13 @@
     margin: 0;
     border-left: 3px solid brown;
     font-weight: bold;">
+		<div class="has-error">Be sure Please to Submit Your Username Not Dr Name </div>
+		<div class="has-error">Be sure Please to Submit Your password Not Dr password </div>
+		
         {{# each messages}}
         <div class="has-error">{{this}}</div>
         {{/each}}
+
 		{{/if}}
     </div>
 			</div>

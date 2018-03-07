@@ -10,9 +10,9 @@ var session  = require("express-session");
 var flash      = require("connect-flash");
 var passport  = require("passport");
 var localStrategy = require("passport-local");
-var mongodb    = require("mongodb");
 var mongoose    = require("mongoose");
 var expressValidator = require("express-validator");
+const mongoStore = require("connect-mongo")(session) ;
 
 var index = require('./routes/index');
 var signin = require('./routes/signin');
@@ -22,11 +22,12 @@ var ADD        = require("./routes/addDoctor");
 var contact    = require("./routes/contact");
 var about      = require("./routes/about");
 var profile    = require ("./routes/profile");
-var doctor     = require("./routes/doctor");  
+var doctor     = require("./routes/DoctorProfile");  
 var signinDoctor = require("./routes/signinDoctor");
+var users       = require("./routes/users");
+var Dates       = require("./routes/Dates");
 
 var app = express();
-
 
 
 //  connect to database and run server on port 
@@ -61,10 +62,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(cookieParser());
 app.use(session({
-  secret:"Shadow" ,
-  resave:true,
-  saveUninitialized:true ,
-  cookie:{maxAge:490*60*1000}
+  secret:"I am The Shadow" ,
+  resave:false,
+  store: new mongoStore({mongooseConnection:mongoose.connection  }),
+  saveUninitialized:false ,
+  cookie:{maxAge:30*60*1000}
 }));
 
 app.use(passport.initialize()) ;
@@ -79,6 +81,9 @@ app.use(function (req, res, next) {
   res.locals.login = req.isAuthenticated();
   res.locals.notlogedin = !req.isAuthenticated();
   res.locals.session = req.session ; 
+  if (req.isAuthenticated()&& req.user) {
+    res.locals.isDoctor = req.user.isDoctor ;
+  }
   res.locals.messages  = require("express-messages")(req,res);
   
   next();
@@ -92,7 +97,9 @@ app.use("/signup",signup);
 app.use("/about" , about);
 app.use("/contact" , contact);
 app.use("/profile" , profile);
-app.use("/doctor" , doctor);
+app.use("/DoctorProfile" , doctor);
+app.use("/users" , users);
+app.use('/Dates',Dates);
 
 
 app.use("/addDoctor" , ADD);

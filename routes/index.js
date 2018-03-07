@@ -16,9 +16,7 @@ var sgTransport = require('nodemailer-sendgrid-transport');
 // router.use(csurfProtection);
 
 router.get("/" ,(req,res) => {
-    var user = req.session.user ;
-    console.log(req.isAuthenticated() , "doc");
-    
+    var user = req.user ;
         res.render("index" , {title:"Find-a-Doctor" , user:user});
 });
 
@@ -46,26 +44,6 @@ router.get("/doctors" ,  (req,res) => {
 
 
 // router to show doctor profile
-
-
-router.get("/DoctorProfile"  ,(req,res,next) => {
-    nameDoc = "maha";
-    Doctor.findOne({name:nameDoc} ,(err , Doc) => {
-        if (err) {
-            throw err ; 
-        } else {
-            if (!Doc) {
-                res.location("/doctors");
-                
-                res.redirect("/doctors");
-
-            } else {
-                res.render("profileDoctor" ,{Doc:Doc});
-            }
-        }        
-    });
-
-});
 
 
 
@@ -712,7 +690,6 @@ router.get("/editPost/:id",(req,res,next) => {
 
 //  route  edit  post
 
-
 router.post('/editpost', (req, res) => {
     var user = req.session.user ,
         postID = req.body.postID,
@@ -731,16 +708,10 @@ router.post('/editpost', (req, res) => {
                         res.location("/feedback");
                         res.redirect("/feedback");
                     } else {
-                        console.log(data.user== user.id);
-                        console.log(data.post == oldpost);
-                        
                         
                         if (data.user == user.id && data.post === oldpost) {
                             data.post  = post ;
                             data.title = title ;
-
-                            console.log(data);
-
                             data.save(function (err,re) { 
                                 if (err) {
                                     throw err ;

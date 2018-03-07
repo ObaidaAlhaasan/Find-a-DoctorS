@@ -1,0 +1,177 @@
+{{#if Doc}}
+  <div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-md-4">
+            <aside>
+              <h2>image for certificate dr</h2>
+                <img src="/images/NoImage.png" alt="Demo">
+            </aside>
+        </div>
+        <div class="col-xs-6 col-md-8">
+                <br>
+                <br>
+            
+            <div class="card text-left">
+              <div class="card-header alert-info"> <strong >  We hope for you a good health </strong>
+                &nbsp;                &nbsp;                &nbsp;                &nbsp;
+                  <strong class="badge-light ">Dates with : <small>{{Doc.name}}</small></strong>
+              </div>
+              <div class="card-body">
+                <h5>
+                  <small class=" badge-light ">  We will send a notification for Dr {{Doc.name}} and wehope he have free time in near chance
+                </small>
+                <small class="badge badge-pill badge-light">We will send for you Dr Date and Details but please Be awar for your notification</small>
+                  </h5>
+                <form action="/Dates/TakeDate" method="post">
+                
+                <div class="form-group">
+                  <label for="">Your Mobile Number   </label>
+
+                  <input type="number"   maxlength="10" required="required" name="number" class="form-control" placeholder="Mobile Phone Start Using 0 Please" >
+                </div>
+
+                <div class="form-group">
+                  <label for="">Your G-mail  </label>
+
+                  <input type="email" required name="email" minlength="6"class="form-control" placeholder="G-mail">
+                </div>
+                <input type="hidden" name="Docname" value="{{Doc.name}}">
+                <button type="submit" class="btn btn-info ">ADD Date <i class="fa fa-calendar-check-o fa-fw fa-lg" aria-hidden="true"></i> </button>
+                </form>
+
+                
+              </div>
+              
+                  <ul class="lead  has-error">
+                    {{#if errors}}
+                      
+                {{#each errors}}
+                    
+                    <li class="alert alert-danger">{{this.msg}}</li>
+                {{/each}}
+                    {{/if}}
+                
+                  </ul>
+            </div>
+        </div>      
+    </div>
+</div>
+{{else if isDoctor}}
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 col-md-4">
+            <aside>
+              <h2>image for certificate dr</h2>
+              
+                <img src="/images/NoImage.png" alt="Demo">
+            </aside>
+        </div>
+        <div class="col-xs-6 col-md-8">
+                <br>
+                <br>
+            
+            <div class="card text-left">
+              <div class="card-header alert-info"> <strong > Thanks Doctor <em> {{Doctor.name}} </em>For using Our Site </strong>
+                &nbsp;                &nbsp;                &nbsp;                &nbsp;
+              </div>
+              <div class="card-body">
+                <h5>
+                  <small class="badge badge-pill badge-light ">We will send a notification for Users , we hope you  have free time in near chance to Help him
+                </small>
+                </h5>
+
+                <br>
+
+                  {{#if Data}}
+                <div class="card badge-light text-left" style="max-height:600px; overflow:auto;">
+                  <div class="card-body">
+                   
+                      {{#each Data }}
+                      {{#each this.users }}
+                    <div>
+                    <h5 class="card-title"> User Name <strong>{{this.name}} </strong> </h5>
+                    <p class="card-text">Mobile Number  <strong>{{this.number}}</strong></p>
+                    <p class="card-text"> E-mail Address  <strong>{{this.email}} </strong> </p>
+
+                    <form action="/Dates/confirmDate" method="post">
+                    <div class="row">
+
+                    <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                      <label for="">ADD Date <i class="fa fa-calendar-times" aria-hidden="true"></i> </label>
+                      <input type="date" class="form-control" name="date" >
+                    
+
+                    </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+
+                    <div class="form-group">
+                      <label> Description 'optional' <i class="fa fa-calendar-times" aria-hidden="true"></i> </label>
+                      <input type="text" class="form-control" name="description" >
+
+                    
+                    </div>
+                    </div>
+                    
+
+                    <div class="col-xs-6 col-md-6">
+                    <div class="form-group">
+                      <label for="">Time Start<i class="fa fa-calendar-times" aria-hidden="true"></i> </label>
+                      <input type="time" class="form-control" name="timeS" >
+                    
+                      <br>
+
+                    <button type="submit" class="btn btn-warning btn-block">ADD Date </button>
+
+                    </div>
+                    </div>
+                    <div class="col-xs-6 col-md-6">
+
+                    <div class="form-group">
+                      <label> Time End <i class="fa fa-calendar-times" aria-hidden="true"></i> </label>
+                      <input type="time" class="form-control" name="timeE" >
+
+                    </div>
+                    </div>
+                    
+                    
+                    </div>
+                    <input type="hidden" name="username" value="{{this.name}}">
+                    <input type="hidden" name="email" value="{{this.email}}">
+                    <input type="hidden" name="number" value="{{this.number}}">
+                    <input type="hidden" name="Drname" value="{{this.Drname}}">
+                    <input type="hidden" name="userID" value="{{this.userID}}">
+                    
+                    </form>
+                    </div>
+                    <br>
+                    <hr class="coloredHR">
+                        {{/each}}
+                    
+                       {{/each}}
+
+                  </div>
+                </div>
+                     
+
+                      {{!-- <h2 class="alert"> No Dates Right now Dr !</h2> --}}
+                    {{/if}}
+              </div>
+              
+                <ul class="lead  has-error">
+                  {{#if errors}}
+                    
+                  
+                {{#each errors}}
+                    
+                    <li class="alert alert-danger">{{this.msg}}</li>
+                {{/each}}
+                {{/if}}
+                  </ul>
+            </div>
+        </div>      
+    </div>
+</div>
+{{/if}}

@@ -9,20 +9,34 @@ var Doctor   = require("../models/doctor");
 
 router.get("/",isLogedin,(req,res,next) => {
     var user = req.session.user ;
-    User.findOne({username:user.username} , (err , useR) => {
-       if (err) {
-           throw err ;
-       } else {
-           if (!useR) {
-               res.location("/signin");
-               res.redirect("/signin");
-           } else {
-               var user  = useR ;
-                res.render('profile' , {title:'profile' , user:user});
-               
-           }
-       } 
-    });
+    var doctor = req.session.Doctor ;
+            if (user && req.user.isDoctor ==false) {
+                User.findOne({username:user.username} , (err , useR) => {
+                    if (err) {
+                        throw err ;
+                    } else {
+                        if (!useR) {
+                            res.location("/signin");
+                            res.redirect("/signin");
+                        } else {
+                            var user  = useR ;
+                             res.render('profile' , {title:'profile' , user:user});
+                            
+                        }
+                    } 
+                 });
+            } else {
+                if (doctor && req.user.isDoctor == true ) {
+
+                    res.location("/DoctorProfile?name"+req.user.username);
+                    res.redirect("/DoctorProfile?name="+req.user.username);
+                } else {
+                    res.location("/logout");
+                    res.redirect("/logout");
+
+                }
+            }
+
 });
 
 router.post("/"  , (req,res) => {
@@ -137,7 +151,7 @@ router.post("/uploadImage" , upload.single('avatar') , (req,res,next) => {
     
     if (req.file) {
     var avatar = req.file.avatar ;
-    var fileName = req.file.filename    ;
+    var fileName = req.file.filename ;
     var user = req.session.user ;
     
         User.findOne({_id:user.id} , (err,useR) => {
@@ -149,9 +163,10 @@ router.post("/uploadImage" , upload.single('avatar') , (req,res,next) => {
                 var errors = [{msg:" No User Found please Sign in !"}];
                 res.render("profile" ,{errors:errors});
                } else {
-                   var validMime = ["png","jpeg","jpg" ,"gif"];
+                   
+                var validMime = ["png","jpeg","jpg" ,"gif"];
                 if (req.file.size > 2 * 1024 * 1024 || validMime.includes(req.file.mimetype.toLowerCase()) ) {
-                    errors = [{msg:"Image Size Should Be smaller than 2 MB  and extension:  .gif .png .jpeg .jpg " }];
+                 var    errors = [{msg:"Image Size Should Be smaller than 2 MB  and extension:  .gif .png .jpeg .jpg " }];
                     res.render("profile" ,{errors:errors});
                 } else {
                    useR.image = fileName;

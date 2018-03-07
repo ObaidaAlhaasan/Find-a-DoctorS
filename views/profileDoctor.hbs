@@ -1,10 +1,143 @@
+
+{{#if isDoctor}}
+
+<div class="container">
+
+<div class="row">
+<div class="col-xs-6 col-md-4">
+        
+    <aside class="alert-info" style="margin: 20px -10px 0;">
+        <form action="/DoctorProfile/Edit2" method="post" enctype="multipart/form-data">
+
+        <img style="height:289px; width:319px; border-radius:100%;border:3px dotted aqua "  class="img-responsive img-rounded " src="{{#if Doc.image}}../images/Doctor/{{Doc.image}} {{else}}../images/NoImage.png{{/if}}" alt="Demo Image">
+        <br>
+        <br>
+            <div class="form-group">
+              <label class="custom-file text-center">
+                <input type="file" name="avatar" placeholder="Edit Your Profile Image" class="custom-file-input form-control">
+                <span class="custom-file-control "> <strong class="btn-sm btn badge-primary ">Edit Your Image Profile</strong>  </span>
+              </label>
+            </div>
+        <hr class="coloredHR">
+        <div class="details">
+            <div >
+                <p>
+                    <label class="badge-light" > WorkingTime Start: : </label>
+                    <input type="time" value="{{Doc.workS}}" name="workS"  class="form-control">             
+                </p>
+                <p>
+                    <label class="badge-light" > WorkingTime End: : </label>
+                    <input type="time" value="{{Doc.workE}}" name="workE"   class="form-control">             
+                </p>
+
+                <p>
+
+                    <label class="badge-light" > Location Area: </label>
+                    <input type="text" value="{{Doc.locationArea}}" name="locationArea"  class="form-control">             
+                </p>
+                                                       
+            </div>
+        </div>
+
+            <button  type="submit" class="btn-info btn btn-block">Save Changes</button>
+
+        </form>
+    </aside>
+    
+
+</div>
+<div style="margin: 20px -10px 0 0;" class="col-xs-6 col-md-8">
+    <form action="/DoctorProfile/Edit1" method="post">
+    
+    <div style="margin:0" class=" clearfix heading alert btn-primary ">
+        
+    <span class="pull-right badge-primary badge-pill">Your Dates <a  style="width: 80px !important;height: 80px !important;
+border-radius: 100%;border: 2px dotted mediumaquamarine;background: snow;padding: 4px;" href="/Dates/calendar?Drname={{Doc.name}}"><strong > <i style="color:crimson" class="animated infinite  pulse fa fa-fw fa-lg fa-calendar">{{count}}</i> </strong> </a> 
+&nbsp;&nbsp;&nbsp;&nbsp;
+Notefication<a  href="/Dates/NDoctor?Drname={{Doc.name}}">   <i  style="color:rgb(255, 14, 62);font-size:38px " class="fa fa-fw  fa-lg fa-info-circle animated pulse infinite " aria-hidden="true"></i>    </a>
+</span>
+    
+    <label class="pull-left badge-info">Edit Your Name</label>
+    <input type="text" class="form-control" required="required" minlength="6" maxlength="30"   name="name" value="{{Doc.name}}">
+
+    </div>
+    <div style=" margin-bottom:0" class="jumbotron">
+        <label class="badge-secondary">Edit About Doctor</label>
+
+        <input type="text" class="form-control" name="about" value="{{Doc.About}}" >
+        <br>
+        <label class="badge-secondary">Edit Your Email </label>
+        <input type="email" name="email" class="form-control" value="{{Doc.email}}">
+        <hr class="coloredHR">
+        <button type="submit" class="btn btn-success">Save Changes</button>
+
+    </div>
+        
+    </form>
+    
+    <hr style="border:2px solid rgb(127, 228, 194)">
+        <h3 class="card badge-secondary">Latest  Comments</h3>
+    
+    <div class="commentS">
+        <div class="c">
+            
+            {{# each Doc.comments}}
+            <div class="editComment"> 
+                <strong style="padding: 7px;background:cadetblue;font-size:15px;color:white;font-weight: bold;border-radius: 0px 30px 10px;">  
+                {{this.username}}
+                </strong>
+                <form  class="hiddenForm" action="/EditComment" method="post">
+
+                <p style="font-weight:bold; margin:15px 0;" class="lead appends clrearfix">
+
+                {{!--  inputs that compare toreturn apprear or not edit button --}}
+                <input type="hidden" class="userComment"  data-comment="{{this.username}}">
+
+                <p class="lead ">{{this.msg}} </p>
+                    <input type="hidden" name="nameUser" value="{{this.username}}">
+                    <input type="hidden" name="message" class="form-control" value="{{this.msg}}">
+                    <input type="hidden" name="nameDoc" class="nameDoc" value="">
+                </p>
+                </form>                   
+                
+            </div>
+            <hr>
+            
+            {{/each}}
+                {{!--  this important for comparing in jquery --}}
+                <input type="hidden" class="userNow"  data-now="{{user.username}}">
+                <input type="hidden" class="nameDoctor" name="nameDoctor" value="{{Doc.name}}">
+    
+        </div>
+        
+    </div>
+            {{# if errors }}
+            <div  class="has-error animated bounceIn">
+                <div class="alert alert-danger">
+                    <ul class="help-block">
+                    {{#each errors}}
+                        <li>  <strong> {{this.msg}} </strong> </li>
+                    {{/each}}
+
+                    </ul>
+                    <a href="/profile" class="btn-sm btn-warning"> try again ?</a>
+                    
+                </div>
+            </div>
+        {{/if}}
+</div>
+</div>
+<hr class="coloredHR">
+
+</div>
+{{else}}
+
 <div class="container">
 
 <div class="row">
 <div class="col-xs-6 col-md-4">
     <aside class="alert-info" style="margin: 20px -10px 0;">
-        <img  class="img-responsive img-rounded " src="../images/NoImage.png" alt="Demo Image">
-        
+               <img style="height:289px; width:319px; border-radius:100%;border:3px dotted aqua "  class="img-responsive img-rounded " src="{{#if Doc.image}}../images/Doctor/{{Doc.image}} {{else}}../images/NoImage.png{{/if}}" alt="Demo Image">
         <br>
         <br>
         <hr class="coloredHR">
@@ -39,14 +172,18 @@
 
 </div>
 <div style="margin: 20px -10px 0 0  ;" class="col-xs-6 col-md-8">
-    <div style="margin:0" class="heading alert btn-primary "> Dr Name : <strong class="tlt">{{Doc.name}} </strong>   
+    <div style="margin:0" class="heading alert btn-primary ">
+    <span class="pull-right">ADD Date <a style="width: 80px !important;height: 80px !important;
+border-radius: 100px;border: 2px dotted mediumaquamarine;background: snow;padding: 4px;" href="/Dates?Drname={{Doc.name}}"> <i style="color:crimson" class="fa fa-fw fa-lg fa-calendar"></i><i class="fa fa-plus" aria-hidden="true"></i>  </a> </span>
+         Dr Name : <strong class="tlt">{{Doc.name}} </strong>   
     </div>
     <div style=" margin-bottom:0" class="jumbotron">
+
         <h5 class="display-5">About Doctor</h5>
         <p class="lead"> {{Doc.About}} </p>
         <hr class="coloredHR">
-
     </div>
+
     <hr style="border:2px solid rgb(127, 228, 194)">
         <h3 class="card badge-secondary">Latest  Comments</h3>
     
@@ -217,3 +354,5 @@
 
 </div>
 </div>
+
+{{/if}}

@@ -1,13 +1,26 @@
-<div style="background-color:silver">
+{{#if session.user}}
+    <div style="background-color:silver">
 
 <div class="container">
     <div class="row">
 
             <div class="col-xs-12 col-md-12">
-
-
+        {{#if isDoctor}}
+            <h2>Access Denied Logout Please !</h2>
+     {{else}}
             <div class="profile">
-            <div class="alert  badge-info"> <h2 > <small> You are welcome Mr : </small> <strong class="tlt">   {{#if errors }} User {{/if}} {{user.username}} </strong> <em>   Edit Your Profile it's always easy </em> </h2> </div>
+            <div class="alert  badge-info">
+
+       
+           <a class="pull-right badge-pill badge-light" style="border:1px dotted rgb(214, 14, 14)" href="/Dates/notification?name={{user.username}}">
+             Notifications 
+                <i  style="color:crimson;font-size:26px " class="fa fa-fw  fa-lg fa-info-circle animated pulse infinite " aria-hidden="true"></i>           
+            </a>
+
+          
+             <h3 > <small> You are welcome Mr : </small> <strong class="tlt">   {{#if errors }} User {{/if}} {{user.username}} </strong> <em>   Edit Your Profile it's always easy </em> </h3> 
+            
+            </div>
                 <div class="row">
                 <div class="col-xs-8 col-md-8">
                 <form action="/profile" method="post">
@@ -93,8 +106,12 @@
                   </div>
 
                 {{/if}}
+                 {{/if}}
             </div>
         </div>
     </div>
 </div>
 </div>
+{{else}}
+    <h3 class="alert badge-secondary"> You are Not allowed To see this page </h3>
+{{/if}}

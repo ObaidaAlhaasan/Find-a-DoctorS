@@ -1,0 +1,94 @@
+{{#if Data}}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+        <div  style=" overflow:auto;  margin: 30px 0;font-weight: bold;box-shadow: 5px 5px 10px silver;border: 2px solid antiquewhite;padding: 20px;">
+
+{{#each Data}}  
+        
+        <div class="card">
+          <div class="card-body">
+            <h4 style="color:rgb(10, 100, 173); " class="card-title badge-pill badge-secondary alert">Notfication for  {{this.name}} from Doctor {{this.Drname}}  <span class="pull-right"><i  style="color:rgb(10, 100, 173);font-size:26px " class="fa fa-fw  fa-lg fa-info-circle animated pulse infinite " aria-hidden="true"></i>    </span> </h4>
+            <h6 class="  badge-pill badge-light">Description: <strong>
+            {{this.description}}
+            </strong>
+            </h6>
+          </div>
+          <div class="card-body">
+            <p class="card-text alert badge-light" >Date  : {{this.WDate}}</p>
+            <p class="lead alert badge-light">Time Date Start at <strong>{{this.timeS}}</strong> </p>
+            <p class="lead alert badge-light">Time Date End at <strong>{{this.timeE}}</strong> </p>
+            <br>
+            <span style="border-left:3px solid aqua" class="lead alert badge-light">We also Sent a Notification for this Email <strong>{{this.email}} </strong> </span>
+            
+          </div>
+           
+          <form action="/Dates/ConfirmUFD" method="post">
+          <input type="hidden" name="Drname" value="{{this.Drname}}">
+          <input type="hidden" name="Drname" value="{{this.Drname}}">
+          <input type="hidden" name="timeS" value="{{this.timeS}}">
+          <input type="hidden" name="timeE" value="{{this.timeE}}">
+          
+          <input type="hidden" name="date" value="{{this.WDate}}">
+           <button class="btn btn-success " style="margin: 20px;border: 2px solid forestgreen;border-radius: 100%;width: 70px;height: 70px;"  type="submit" aria-required="true" title="Please Be aware By click on this Link you will removed this Notification and We Will send a confirm Date For Doctor From You">
+                OK <i class="fa fa-check  fa-fw fa-lg"></i>
+           </button>
+            </form>
+            
+        </div>
+
+{{/each}}
+    </div>
+    
+        </div>
+    </div>
+</div>
+    
+{{else if Doc}}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+        <div  style=" overflow:auto;  margin: 30px 0;font-weight: bold;box-shadow: 5px 5px 10px silver;border: 2px solid antiquewhite;padding: 20px;">
+
+        
+        <div class="card">
+          <div class="card-body">
+
+            <h4 style="color:rgb(10, 100, 173); " class="card-title badge-pill badge-secondary alert">Notfication for  {{Doc.name}}<span class="pull-right"><i  style="color:rgb(10, 100, 173);font-size:26px " class="fa fa-fw  fa-lg fa-info-circle animated pulse infinite " aria-hidden="true"></i>    </span> </h4>
+          </div>
+    {{#each Doc.msgConfirm as |item ind|}}
+
+          <div class="card-body badge-light">
+              <ul style="list-style:none" class="has-success badge-light">
+                  <li  class=" alert badge-light">
+
+              {{item}}
+
+                  </li>
+              </ul>
+          </div>
+            <a href="/Dates/DeleteNotification?N={{ind}}">
+           <button class="btn btn-success btn-sm " style="margin:1px 59px 0;width: 57px;height: 57px;border-radius: 100%;"  type="submit" aria-required="true" title="Please Be aware By click on this Link you will removed this Notification">
+                OK <i class="fa fa-check  fa-fw fa-lg"></i>
+           </button>            
+            </a>
+
+        
+         <hr class="coloredHR">
+    {{/each}}
+    
+         
+            
+        </div>
+
+    </div>
+    
+        </div>
+    </div>
+</div>
+
+    {{else}}
+    <h1 class="tlt alert badge-info text-center tlt">No Notification To Show </h1>
+
+
+{{/if}}

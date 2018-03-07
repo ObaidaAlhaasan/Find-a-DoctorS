@@ -47,10 +47,19 @@
 
 
             <li class="nav-item"><a href="/profile" class="nav-link" >
-            {{#if session.user.image}} <img style="width:30px; height:30px; border-radius:55px;" src="/images/{{session.user.image}}" alt=""> 
-
-              {{else}} <i class="fa fa-user-circle-o"></i>
-            {{/if}}      
+            {{#if isDoctor}}
+             <i class="fa fa-user-circle-o"></i>
+             {{!-- <img style="width:30px; height:30px; border-radius:55px;" 
+             src="/images/Doctor/{{user.image}}" alt="Img Doc">                     --}}
+            {{else}} 
+            {{#if session.user.image}}
+            <img style="width:30px; height:30px; border-radius:55px;" 
+             src="/images/{{session.user.image}}" alt="Img User">  
+             {{else}}
+                <i class="fa fa-user-circle-o"></i>
+             {{/if}}
+            {{/if}}
+                  
                My Account</a> </li>
 
             <li class="nav-item"><a href="/logout" class="nav-link" > <i style="color:rgb(226, 169, 64)" class="fa fa-fw fa-lg fa-sign-out"></i> Logout</a> </li>

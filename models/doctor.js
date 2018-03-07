@@ -30,8 +30,9 @@ var Doctor = new Schema({
     certificate:{type:String , default:"NoImageCER.png"},
     rating:{type:Array },
     ratingUsers:{type:Array  },
+    msgConfirm:{type:Array},
 
-    comments:{type:Array,default:[{username:String , msg:String}]}
+    comments:[{username:String , msg:String}]
 
 });
 

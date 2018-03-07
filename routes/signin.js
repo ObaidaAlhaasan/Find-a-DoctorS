@@ -59,10 +59,18 @@ passport.use('local.signin', new localStrategy({
       return done(null , false, {message:"Wrong Password..?"})  ;
   }
 
+  if (user.isDoctor === true && user.DoctorID) {
+      
+    req.session.Doctor = {username:user.username , id:user._id,image:user.image} ;
+    
+    return done(null , user);
+          
+  }else{  
+    req.session.user = {username:user.username , id:user._id,image:user.image} ;
+    return done(null , user);
+  }
 
-  req.session.user = {username:user.username , id:user._id,image:user.image} ;
-  
-  return done(null , user);
+
 
   });
 }));
@@ -91,7 +99,14 @@ router.post("/", passport.authenticate('local.signin', {
       res.redirect(oldUrll);
 
   } else {
-      res.redirect("/profile");
+      if (req.user.isDoctor) {
+        res.location("/DoctorProfile?name="+req.user.username);
+        res.redirect("/DoctorProfile?name="+req.user.username);
+      } else {
+        res.location("/profile");
+        res.redirect("/profile");
+      }
+
   }
 });
 
